@@ -76,6 +76,7 @@ SOURCES: dict[str, Source] = {s.name: s for s in [
              ORCA_REV),
     )),
     Source("arith", "ours (src/slm50m/arith)"),
+    Source("arith_v2", "ours (src/slm50m/arith)"),  # D-045
 ]}
 
 

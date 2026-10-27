@@ -78,13 +78,14 @@ class Trainer:
             self.val = {s: self.loader.val_windows(s, cfg.val_windows_per_source, cfg.seq_len + 1)
                         for s in self.sources}
 
-        self.proxy_items, self.tokenizer = [], None
+        self.proxy_items, self.transfer_items, self.tokenizer = [], [], None
         if cfg.tokenizer_dir is not None:
-            from slm50m.arith.proxy import make_items
+            from slm50m.arith.proxy import make_items, make_transfer_items
             from slm50m.tokenizer.train_tokenizer import load_tokenizer
 
             self.tokenizer = load_tokenizer(cfg.tokenizer_dir)
             self.proxy_items = make_items(cfg.proxy_items)
+            self.transfer_items = make_transfer_items(cfg.proxy_items)  # D-045
 
         # progress counters, restored on resume
         self.step = 0  # optimizer steps done
@@ -195,6 +196,7 @@ class Trainer:
             from slm50m.arith.proxy import score_items
 
             out["proxy_acc"] = score_items(self.model, self.tokenizer, self.proxy_items, self.device)
+            out["proxy_transfer_acc"] = score_items(self.model, self.tokenizer, self.transfer_items, self.device)
         self.model.train()
         return out
 

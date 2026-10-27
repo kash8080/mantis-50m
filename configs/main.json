@@ -26,5 +26,18 @@
   "ckpt_every_minutes": 10.0,
   "gpu_usd_per_hour": 3.95,
   "n_gpus": 1,
-  "max_usd": 22.0
+  "max_usd": 22.0,
+  "decay_mix": {
+    "climbmix": 0.20,
+    "txt360_web": 0.06,
+    "fineweb_edu": 0.14,
+    "cosmopedia_v2": 0.09,
+    "wikihow": 0.09,
+    "finemath": 0.08,
+    "txt360_qa": 0.07,
+    "txt360_nltk_qa": 0.07,
+    "word_problems": 0.08,
+    "arith": 0.0,
+    "arith_v2": 0.12
+  }
 }

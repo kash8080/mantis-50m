@@ -7,6 +7,7 @@ Every paid entry point prints its worst-case cost and waits for a yes (D-015, CL
     uv run modal run modal_app.py::prep_benchmarks                         # CPU: benchmark items for the 13-gram filter
     uv run modal run modal_app.py::prep --source wikihow --n-files 1       # CPU: parquet -> shards + manifests/
     uv run modal run modal_app.py::prep_arith --n-shards 4 --tokens-per-shard 50000000
+    uv run modal run modal_app.py::prep_arith --source arith_v2 --n-shards 4 --tokens-per-shard 75000000  # D-045
     uv run modal run modal_app.py::sync_manifests                          # free: manifests on the Mac <-> Volume
     uv run modal run modal_app.py::overlap                                 # CPU: cross-source duplicates -> reports/
     uv run modal run modal_app.py::run_benchmark --gpu H100 --data --tst   # gate 3 throughput (no --data: random)
@@ -233,25 +234,28 @@ def prep(source: str, n_files: int, val_docs: int = 2000, yes: bool = False):
 
 @app.function(image=image, scaledown_window=IDLE, volumes={DATA: data_vol}, cpu=2, memory=4096, timeout=2 * 3600,
               max_containers=20)
-def prep_arith_shard(shard_index: int, n_tokens: int, val_docs: int) -> dict:
+def prep_arith_shard(shard_index: int, n_tokens: int, val_docs: int, source: str = "arith") -> dict:
     from slm50m.dataprep.prep import prep_arith
     from slm50m.tokenizer.train_tokenizer import load_tokenizer
 
-    entry = prep_arith(DATA, load_tokenizer(Path(DATA) / "tokenizer"), shard_index, n_tokens, val_docs)
+    bench = _bench_filter() if source == "arith_v2" else None  # D-045: v2 runs the 13-gram filter too
+    entry = prep_arith(DATA, load_tokenizer(Path(DATA) / "tokenizer"), shard_index, n_tokens, val_docs, source, bench)
     data_vol.commit()
     return entry
 
 
 @app.local_entrypoint()
-def prep_arith(n_shards: int, tokens_per_shard: int, val_docs: int = 2000, yes: bool = False):
-    from slm50m.dataprep.prep import shard_index
+def prep_arith(n_shards: int, tokens_per_shard: int, val_docs: int = 2000, source: str = "arith", yes: bool = False):
+    from slm50m.dataprep.prep import ARITH_GENERATORS, shard_index
 
-    done = _synced_manifest("arith")
+    if source not in ARITH_GENERATORS:
+        raise SystemExit(f"--source must be one of {list(ARITH_GENERATORS)}")
+    done = _synced_manifest(source)
     start = 1 + max((shard_index(e["shard"]) for e in done), default=-1)  # also the seed of each shard
     has_val = any(e["role"] == "val+train" for e in done)
-    jobs = [(start + i, tokens_per_shard, val_docs if i == 0 and not has_val else 0) for i in range(n_shards)]
-    confirm(f"generate {n_shards} arithmetic shards", n_shards * PREP_CONTAINER_HOUR * OVERHEAD + 0.01, yes)
-    _record("arith", jobs, list(prep_arith_shard.starmap(jobs, return_exceptions=True)))
+    jobs = [(start + i, tokens_per_shard, val_docs if i == 0 and not has_val else 0, source) for i in range(n_shards)]
+    confirm(f"generate {n_shards} {source} shards", n_shards * PREP_CONTAINER_HOUR * OVERHEAD + 0.01, yes)
+    _record(source, jobs, list(prep_arith_shard.starmap(jobs, return_exceptions=True)))
 
 
 @app.local_entrypoint()
@@ -289,7 +293,7 @@ def overlap(n_docs: int = 1_000_000, out: str = "reports/overlap.json", yes: boo
     from slm50m.dataprep.overlap import overlap_report
     from slm50m.dataprep.sources import SOURCES
 
-    sources = [s for s in SOURCES if s != "arith" and _read_volume_json(f"manifests/{s}.json")]  # arith is generated
+    sources = [s for s in SOURCES if not s.startswith("arith") and _read_volume_json(f"manifests/{s}.json")]  # arith is generated
     confirm(f"hash {n_docs:,} documents of {len(sources)} sources", len(sources) * PREP_CONTAINER_HOUR * OVERHEAD + 0.01,
             yes)
     # list() drains starmap's generator. zip() alone stops reading it early and Modal prints asyncgen errors

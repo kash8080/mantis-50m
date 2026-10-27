@@ -19,6 +19,7 @@ from pathlib import Path
 import numpy as np
 from tokenizers import Tokenizer
 
+from slm50m.arith import generator_v2
 from slm50m.arith.generator import generate_document
 from slm50m.config import EOS_ID, MANIFEST_DIR
 from slm50m.dataprep.decontam import BenchmarkFilter
@@ -109,20 +110,31 @@ def prep_hf_file(source: str, part_index: int, filename: str, shard_index: int, 
                              "role": "val+train" if val_docs else "train", "shard": out.name, **stats})
 
 
-def prep_arith(data_dir: str | Path, tokenizer: Tokenizer, shard_index: int, n_tokens: int, val_docs: int = 0) -> dict:
-    """Synthetic arithmetic -> one shard of about n_tokens. Seeded by the shard index, so shards never repeat."""
-    rng = random.Random(shard_index)
+ARITH_GENERATORS = {"arith": ("src/slm50m/arith/generator.py", generate_document, 0),
+                    "arith_v2": ("src/slm50m/arith/generator_v2.py", generator_v2.generate_document, 1_000)}
+
+
+def prep_arith(data_dir: str | Path, tokenizer: Tokenizer, shard_index: int, n_tokens: int, val_docs: int = 0,
+               source: str = "arith", bench_filter: BenchmarkFilter | None = None) -> dict:
+    """Synthetic arithmetic -> one shard of about n_tokens. Seeded by the shard index (plus an offset per
+    generator), so shards never repeat. arith_v2 runs the benchmark filter too (D-045): its wording is wide
+    enough that a 13-gram hit is possible, and any hit document is dropped and counted."""
+    revision, generate, seed_offset = ARITH_GENERATORS[source]
+    rng = random.Random(seed_offset + shard_index)
+    if bench_filter is not None:
+        bench_filter.dropped.clear()
 
     def docs():
         written = 0
         while written < n_tokens:
-            doc = generate_document(rng)
+            doc = generate(rng)
             written += len(tokenizer.encode(doc, add_special_tokens=False).ids) + 1  # + <|endoftext|>
             yield doc
 
-    out = shard_path(data_dir, "arith", shard_index)
-    stats = prep_documents(docs(), tokenizer, out, None, val_path(data_dir, "arith") if val_docs else None, val_docs)
-    return _save_entry(out, {"repo": "generated", "revision": "src/slm50m/arith/generator.py",
+    out = shard_path(data_dir, source, shard_index)
+    stats = prep_documents(docs(), tokenizer, out, bench_filter, val_path(data_dir, source) if val_docs else None,
+                           val_docs)
+    return _save_entry(out, {"repo": "generated", "revision": revision,
                              "file": f"seed {shard_index}", "role": "val+train" if val_docs else "train",
                              "shard": out.name, **stats})
 
