@@ -141,6 +141,7 @@ class RunConfig:
     # monitoring (D-014)
     log_every: int = 10
     eval_every: int = 250
+    eval_at_start: bool = False  # one eval before the first step, e.g. a baseline for a resumed test run (D-045)
     val_windows_per_source: int = 32
     proxy_items: int = 400
     milestone_every_tokens: float = 1e9  # milestone checkpoint for the real benchmarks

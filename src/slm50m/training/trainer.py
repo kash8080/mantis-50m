@@ -211,6 +211,8 @@ class Trainer:
         self.log.write("start", step=self.step, resumed_from=self.resumed_from, device=str(self.device), gpu=gpu,
                        n_params=self.model.n_params(), git_commit=git_commit(),
                        shards={s: [p.name for p in sh.paths] for s, sh in getattr(self.loader, "shards", {}).items()})
+        if cfg.eval_at_start and (self.val or self.proxy_items):
+            self.log.write("eval", step=self.step, tokens=self.tokens, **self.evaluate())
         self.model.train()
         last_save = time.time()
         milestone = int(self.tokens // cfg.milestone_every_tokens)

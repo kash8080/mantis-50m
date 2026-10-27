@@ -1,0 +1,64 @@
+{
+  "source": "arith_v2",
+  "licence": "ours (src/slm50m/arith)",
+  "totals": {
+    "docs_kept": 1131331,
+    "docs_dropped": 0,
+    "tokens_train": 299478229,
+    "tokens_val": 522466
+  },
+  "files": [
+    {
+      "repo": "generated",
+      "revision": "src/slm50m/arith/generator_v2.py",
+      "file": "seed 0",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 282986,
+      "docs_dropped": 0,
+      "tokens_train": 74477566,
+      "tokens_val": 522466,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {}
+    },
+    {
+      "repo": "generated",
+      "revision": "src/slm50m/arith/generator_v2.py",
+      "file": "seed 1",
+      "role": "train",
+      "shard": "train_00001.bin",
+      "docs_kept": 282848,
+      "docs_dropped": 0,
+      "tokens_train": 75000207,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {}
+    },
+    {
+      "repo": "generated",
+      "revision": "src/slm50m/arith/generator_v2.py",
+      "file": "seed 2",
+      "role": "train",
+      "shard": "train_00002.bin",
+      "docs_kept": 282650,
+      "docs_dropped": 0,
+      "tokens_train": 75000165,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {}
+    },
+    {
+      "repo": "generated",
+      "revision": "src/slm50m/arith/generator_v2.py",
+      "file": "seed 3",
+      "role": "train",
+      "shard": "train_00003.bin",
+      "docs_kept": 282847,
+      "docs_dropped": 0,
+      "tokens_train": 75000291,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {}
+    }
+  ]
+}

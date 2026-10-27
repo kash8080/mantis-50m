@@ -376,9 +376,10 @@ def evaluate(run_name: str, checkpoint: str, limit: int | None = None) -> dict:
 
 
 @app.local_entrypoint()
-def run_eval(run: str, checkpoint: str, limit: int = 0, yes: bool = False):
-    confirm(f"evaluate {run}/{checkpoint} on L4", GPU_PRICES["L4"] * 1.0 * OVERHEAD, yes)
-    summary = evaluate.remote(run, checkpoint, limit or None)
+def run_eval(run: str, checkpoint: str, limit: int = 0, gpu: str = "L4", yes: bool = False):
+    """--gpu A10 when L4s are scarce (an L4 eval was preempted and then queued, 28 Oct 2026)."""
+    confirm(f"evaluate {run}/{checkpoint} on {gpu}", GPU_PRICES[gpu] * 1.0 * OVERHEAD, yes)
+    summary = evaluate.with_options(gpu=gpu).remote(run, checkpoint, limit or None)
     print(json.dumps({"scores": summary["scores"], "ii": summary["ii"]}, indent=2))
 
 
