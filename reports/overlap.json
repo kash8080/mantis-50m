@@ -1,0 +1,306 @@
+{
+  "n_docs": 1000000,
+  "date": "26 Oct 2026",
+  "sources": {
+    "climbmix": {
+      "docs": 1000000,
+      "distinct": 999720,
+      "dup_within": 0.00028
+    },
+    "txt360_web": {
+      "docs": 1000000,
+      "distinct": 999999,
+      "dup_within": 1e-06
+    },
+    "txt360_qa": {
+      "docs": 554564,
+      "distinct": 554564,
+      "dup_within": 0.0
+    },
+    "txt360_nltk_qa": {
+      "docs": 642964,
+      "distinct": 642964,
+      "dup_within": 0.0
+    },
+    "fineweb_edu": {
+      "docs": 1000000,
+      "distinct": 1000000,
+      "dup_within": 0.0
+    },
+    "cosmopedia_v2": {
+      "docs": 1000000,
+      "distinct": 996058,
+      "dup_within": 0.003942
+    },
+    "wikihow": {
+      "docs": 177169,
+      "distinct": 177169,
+      "dup_within": 0.0
+    },
+    "finemath": {
+      "docs": 1000000,
+      "distinct": 999989,
+      "dup_within": 1.1e-05
+    },
+    "word_problems": {
+      "docs": 1000000,
+      "distinct": 998202,
+      "dup_within": 0.001798
+    }
+  },
+  "pairs": [
+    {
+      "a": "climbmix",
+      "b": "cosmopedia_v2",
+      "shared": 580,
+      "of_a": 0.00058,
+      "of_b": 0.000582
+    },
+    {
+      "a": "climbmix",
+      "b": "finemath",
+      "shared": 2,
+      "of_a": 2e-06,
+      "of_b": 2e-06
+    },
+    {
+      "a": "climbmix",
+      "b": "fineweb_edu",
+      "shared": 553,
+      "of_a": 0.000553,
+      "of_b": 0.000553
+    },
+    {
+      "a": "climbmix",
+      "b": "txt360_nltk_qa",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "climbmix",
+      "b": "txt360_qa",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "climbmix",
+      "b": "txt360_web",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "climbmix",
+      "b": "wikihow",
+      "shared": 96,
+      "of_a": 9.6e-05,
+      "of_b": 0.000542
+    },
+    {
+      "a": "climbmix",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "cosmopedia_v2",
+      "b": "finemath",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "cosmopedia_v2",
+      "b": "fineweb_edu",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "cosmopedia_v2",
+      "b": "txt360_nltk_qa",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "cosmopedia_v2",
+      "b": "txt360_qa",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "cosmopedia_v2",
+      "b": "txt360_web",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "cosmopedia_v2",
+      "b": "wikihow",
+      "shared": 4527,
+      "of_a": 0.004545,
+      "of_b": 0.025552
+    },
+    {
+      "a": "cosmopedia_v2",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "finemath",
+      "b": "fineweb_edu",
+      "shared": 8,
+      "of_a": 8e-06,
+      "of_b": 8e-06
+    },
+    {
+      "a": "finemath",
+      "b": "txt360_nltk_qa",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "finemath",
+      "b": "txt360_qa",
+      "shared": 3,
+      "of_a": 3e-06,
+      "of_b": 5e-06
+    },
+    {
+      "a": "finemath",
+      "b": "txt360_web",
+      "shared": 1,
+      "of_a": 1e-06,
+      "of_b": 1e-06
+    },
+    {
+      "a": "finemath",
+      "b": "wikihow",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "finemath",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "fineweb_edu",
+      "b": "txt360_nltk_qa",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "fineweb_edu",
+      "b": "txt360_qa",
+      "shared": 3,
+      "of_a": 3e-06,
+      "of_b": 5e-06
+    },
+    {
+      "a": "fineweb_edu",
+      "b": "txt360_web",
+      "shared": 3,
+      "of_a": 3e-06,
+      "of_b": 3e-06
+    },
+    {
+      "a": "fineweb_edu",
+      "b": "wikihow",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "fineweb_edu",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_nltk_qa",
+      "b": "txt360_qa",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_nltk_qa",
+      "b": "txt360_web",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_nltk_qa",
+      "b": "wikihow",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_nltk_qa",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_qa",
+      "b": "txt360_web",
+      "shared": 9,
+      "of_a": 1.6e-05,
+      "of_b": 9e-06
+    },
+    {
+      "a": "txt360_qa",
+      "b": "wikihow",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_qa",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_web",
+      "b": "wikihow",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "txt360_web",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    },
+    {
+      "a": "wikihow",
+      "b": "word_problems",
+      "shared": 0,
+      "of_a": 0.0,
+      "of_b": 0.0
+    }
+  ],
+  "max_pair_share": 0.025552
+}

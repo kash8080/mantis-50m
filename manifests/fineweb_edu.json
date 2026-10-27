@@ -1,0 +1,81 @@
+{
+  "source": "fineweb_edu",
+  "licence": "ODC-BY",
+  "totals": {
+    "docs_kept": 3250616,
+    "docs_dropped": 120,
+    "tokens_train": 3746980557,
+    "tokens_val": 2398045
+  },
+  "files": [
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "fineweb-edu-dedup/train-00000-of-00234.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 812661,
+      "docs_dropped": 23,
+      "tokens_train": 936470708,
+      "tokens_val": 2398045,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "hellaswag": 14,
+        "piqa": 1,
+        "arc-easy": 8
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "fineweb-edu-dedup/train-00001-of-00234.parquet",
+      "role": "train",
+      "shard": "train_00001.bin",
+      "docs_kept": 812655,
+      "docs_dropped": 29,
+      "tokens_train": 936247642,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 23,
+        "arc-easy": 5,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "fineweb-edu-dedup/train-00002-of-00234.parquet",
+      "role": "train",
+      "shard": "train_00002.bin",
+      "docs_kept": 812654,
+      "docs_dropped": 30,
+      "tokens_train": 920273363,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 19,
+        "arc-easy": 9,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "fineweb-edu-dedup/train-00003-of-00234.parquet",
+      "role": "train",
+      "shard": "train_00003.bin",
+      "docs_kept": 812646,
+      "docs_dropped": 38,
+      "tokens_train": 953988844,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 21,
+        "arc-easy": 15,
+        "arc-challenge": 1,
+        "piqa": 1
+      }
+    }
+  ]
+}

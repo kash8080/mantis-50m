@@ -1,0 +1,43 @@
+{
+  "source": "wikihow",
+  "licence": "Apache-2.0",
+  "totals": {
+    "docs_kept": 179169,
+    "docs_dropped": 22,
+    "tokens_train": 178629811,
+    "tokens_val": 2010043
+  },
+  "files": [
+    {
+      "repo": "HuggingFaceTB/cosmopedia",
+      "revision": "0ae6ec63f91742bd2d1eaef4f02232c55d719385",
+      "file": "data/wikihow/train-00000-of-00002.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 89589,
+      "docs_dropped": 7,
+      "tokens_train": 88232300,
+      "tokens_val": 2010043,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/cosmopedia",
+      "revision": "0ae6ec63f91742bd2d1eaef4f02232c55d719385",
+      "file": "data/wikihow/train-00001-of-00002.parquet",
+      "role": "train",
+      "shard": "train_00001.bin",
+      "docs_kept": 89580,
+      "docs_dropped": 15,
+      "tokens_train": 90397511,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 15
+      }
+    }
+  ]
+}

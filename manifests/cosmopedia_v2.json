@@ -1,0 +1,91 @@
+{
+  "source": "cosmopedia_v2",
+  "licence": "ODC-BY",
+  "totals": {
+    "docs_kept": 1881426,
+    "docs_dropped": 19,
+    "tokens_train": 1497111096,
+    "tokens_val": 1590608
+  },
+  "files": [
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "cosmopedia-v2/train-00000-of-00104.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 376284,
+      "docs_dropped": 5,
+      "tokens_train": 298102169,
+      "tokens_val": 1590608,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "cosmopedia-v2/train-00001-of-00104.parquet",
+      "role": "train",
+      "shard": "train_00001.bin",
+      "docs_kept": 376287,
+      "docs_dropped": 2,
+      "tokens_train": 299618484,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "cosmopedia-v2/train-00002-of-00104.parquet",
+      "role": "train",
+      "shard": "train_00002.bin",
+      "docs_kept": 376287,
+      "docs_dropped": 2,
+      "tokens_train": 299980799,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "cosmopedia-v2/train-00003-of-00104.parquet",
+      "role": "train",
+      "shard": "train_00003.bin",
+      "docs_kept": 376283,
+      "docs_dropped": 6,
+      "tokens_train": 299773725,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/smollm-corpus",
+      "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+      "file": "cosmopedia-v2/train-00004-of-00104.parquet",
+      "role": "train",
+      "shard": "train_00004.bin",
+      "docs_kept": 376285,
+      "docs_dropped": 4,
+      "tokens_train": 299635919,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 3
+      }
+    }
+  ]
+}

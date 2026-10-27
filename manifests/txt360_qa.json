@@ -1,0 +1,30 @@
+{
+  "source": "txt360_qa",
+  "licence": "CC-BY-4.0",
+  "totals": {
+    "docs_kept": 556564,
+    "docs_dropped": 53,
+    "tokens_train": 1368806947,
+    "tokens_val": 4920095
+  },
+  "files": [
+    {
+      "repo": "IFM/TxT360-v2",
+      "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+      "file": "txt360-qa/TxT360-QA.chunk0-992fabba86-00000.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 556564,
+      "docs_dropped": 53,
+      "tokens_train": 1368806947,
+      "tokens_val": 4920095,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "hellaswag": 42,
+        "arc-challenge": 3,
+        "piqa": 4,
+        "arc-easy": 4
+      }
+    }
+  ]
+}

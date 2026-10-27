@@ -1,0 +1,3031 @@
+{
+  "source": "climbmix",
+  "licence": "MIT (reshuffle), upstream CC-BY-NC-4.0",
+  "totals": {
+    "docs_kept": 15653927,
+    "docs_dropped": 985,
+    "tokens_train": 11090019174,
+    "tokens_val": 1405146
+  },
+  "files": [
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00000.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 86012,
+      "docs_dropped": 4,
+      "tokens_train": 58709772,
+      "tokens_val": 1405146,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00001.parquet",
+      "role": "train",
+      "shard": "train_00001.bin",
+      "docs_kept": 86013,
+      "docs_dropped": 3,
+      "tokens_train": 60017570,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00002.parquet",
+      "role": "train",
+      "shard": "train_00002.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 59987841,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 4,
+        "arc-challenge": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00003.parquet",
+      "role": "train",
+      "shard": "train_00003.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 60165779,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00004.parquet",
+      "role": "train",
+      "shard": "train_00004.bin",
+      "docs_kept": 83967,
+      "docs_dropped": 1,
+      "tokens_train": 59677664,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00005.parquet",
+      "role": "train",
+      "shard": "train_00005.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 60133222,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 7
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00006.parquet",
+      "role": "train",
+      "shard": "train_00006.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 59863762,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00007.parquet",
+      "role": "train",
+      "shard": "train_00007.bin",
+      "docs_kept": 83967,
+      "docs_dropped": 1,
+      "tokens_train": 59646966,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00008.parquet",
+      "role": "train",
+      "shard": "train_00008.bin",
+      "docs_kept": 83960,
+      "docs_dropped": 8,
+      "tokens_train": 59600362,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "piqa": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00009.parquet",
+      "role": "train",
+      "shard": "train_00009.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 60155238,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "arc-easy": 1,
+        "hellaswag": 6
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00010.parquet",
+      "role": "train",
+      "shard": "train_00010.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 60229725,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 3,
+        "arc-easy": 3,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00011.parquet",
+      "role": "train",
+      "shard": "train_00011.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 60026037,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00012.parquet",
+      "role": "train",
+      "shard": "train_00012.bin",
+      "docs_kept": 83960,
+      "docs_dropped": 8,
+      "tokens_train": 59881148,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00013.parquet",
+      "role": "train",
+      "shard": "train_00013.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59891788,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00014.parquet",
+      "role": "train",
+      "shard": "train_00014.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 59957565,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 4,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00015.parquet",
+      "role": "train",
+      "shard": "train_00015.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 59904823,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00016.parquet",
+      "role": "train",
+      "shard": "train_00016.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 59908261,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 2,
+        "arc-challenge": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00017.parquet",
+      "role": "train",
+      "shard": "train_00017.bin",
+      "docs_kept": 84982,
+      "docs_dropped": 10,
+      "tokens_train": 60325304,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 7,
+        "arc-easy": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00018.parquet",
+      "role": "train",
+      "shard": "train_00018.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60200640,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00019.parquet",
+      "role": "train",
+      "shard": "train_00019.bin",
+      "docs_kept": 83960,
+      "docs_dropped": 8,
+      "tokens_train": 59832531,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 2,
+        "hellaswag": 4,
+        "arc-challenge": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00020.parquet",
+      "role": "train",
+      "shard": "train_00020.bin",
+      "docs_kept": 86010,
+      "docs_dropped": 6,
+      "tokens_train": 60160785,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00021.parquet",
+      "role": "train",
+      "shard": "train_00021.bin",
+      "docs_kept": 84992,
+      "docs_dropped": 0,
+      "tokens_train": 60104485,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {}
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00022.parquet",
+      "role": "train",
+      "shard": "train_00022.bin",
+      "docs_kept": 86015,
+      "docs_dropped": 1,
+      "tokens_train": 60528522,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00023.parquet",
+      "role": "train",
+      "shard": "train_00023.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 59839931,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00024.parquet",
+      "role": "train",
+      "shard": "train_00024.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 59966065,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 3,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00025.parquet",
+      "role": "train",
+      "shard": "train_00025.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 60139361,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 6,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00026.parquet",
+      "role": "train",
+      "shard": "train_00026.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59737873,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00027.parquet",
+      "role": "train",
+      "shard": "train_00027.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 59927031,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00028.parquet",
+      "role": "train",
+      "shard": "train_00028.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60180477,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00029.parquet",
+      "role": "train",
+      "shard": "train_00029.bin",
+      "docs_kept": 83960,
+      "docs_dropped": 8,
+      "tokens_train": 59705997,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 4,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00030.parquet",
+      "role": "train",
+      "shard": "train_00030.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59799072,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00031.parquet",
+      "role": "train",
+      "shard": "train_00031.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 59962559,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00032.parquet",
+      "role": "train",
+      "shard": "train_00032.bin",
+      "docs_kept": 84990,
+      "docs_dropped": 2,
+      "tokens_train": 59988996,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00033.parquet",
+      "role": "train",
+      "shard": "train_00033.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59928572,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00034.parquet",
+      "role": "train",
+      "shard": "train_00034.bin",
+      "docs_kept": 86008,
+      "docs_dropped": 8,
+      "tokens_train": 59959733,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 6,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00035.parquet",
+      "role": "train",
+      "shard": "train_00035.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 60324992,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00036.parquet",
+      "role": "train",
+      "shard": "train_00036.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 59852939,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00037.parquet",
+      "role": "train",
+      "shard": "train_00037.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 60223358,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1,
+        "arc-easy": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00038.parquet",
+      "role": "train",
+      "shard": "train_00038.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59831003,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00039.parquet",
+      "role": "train",
+      "shard": "train_00039.bin",
+      "docs_kept": 84990,
+      "docs_dropped": 2,
+      "tokens_train": 59662938,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00040.parquet",
+      "role": "train",
+      "shard": "train_00040.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 59862829,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00041.parquet",
+      "role": "train",
+      "shard": "train_00041.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60296924,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00042.parquet",
+      "role": "train",
+      "shard": "train_00042.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 59492978,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-challenge": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00043.parquet",
+      "role": "train",
+      "shard": "train_00043.bin",
+      "docs_kept": 83966,
+      "docs_dropped": 2,
+      "tokens_train": 59831530,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00044.parquet",
+      "role": "train",
+      "shard": "train_00044.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 59506224,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00045.parquet",
+      "role": "train",
+      "shard": "train_00045.bin",
+      "docs_kept": 82937,
+      "docs_dropped": 7,
+      "tokens_train": 59890519,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 2,
+        "arc-challenge": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00046.parquet",
+      "role": "train",
+      "shard": "train_00046.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59909883,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00047.parquet",
+      "role": "train",
+      "shard": "train_00047.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 60153687,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00048.parquet",
+      "role": "train",
+      "shard": "train_00048.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59865324,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00049.parquet",
+      "role": "train",
+      "shard": "train_00049.bin",
+      "docs_kept": 84982,
+      "docs_dropped": 10,
+      "tokens_train": 59591079,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 4,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00050.parquet",
+      "role": "train",
+      "shard": "train_00050.bin",
+      "docs_kept": 82939,
+      "docs_dropped": 5,
+      "tokens_train": 59817420,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00051.parquet",
+      "role": "train",
+      "shard": "train_00051.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 60192972,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00052.parquet",
+      "role": "train",
+      "shard": "train_00052.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 59793795,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00053.parquet",
+      "role": "train",
+      "shard": "train_00053.bin",
+      "docs_kept": 82937,
+      "docs_dropped": 7,
+      "tokens_train": 59978578,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00054.parquet",
+      "role": "train",
+      "shard": "train_00054.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 59701574,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00055.parquet",
+      "role": "train",
+      "shard": "train_00055.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59622327,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00056.parquet",
+      "role": "train",
+      "shard": "train_00056.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 60145038,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 3,
+        "arc-challenge": 1,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00057.parquet",
+      "role": "train",
+      "shard": "train_00057.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 59644156,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00058.parquet",
+      "role": "train",
+      "shard": "train_00058.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 60068107,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00059.parquet",
+      "role": "train",
+      "shard": "train_00059.bin",
+      "docs_kept": 84982,
+      "docs_dropped": 10,
+      "tokens_train": 59984745,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 7,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00060.parquet",
+      "role": "train",
+      "shard": "train_00060.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 59830801,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "piqa": 1,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00061.parquet",
+      "role": "train",
+      "shard": "train_00061.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59829970,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00062.parquet",
+      "role": "train",
+      "shard": "train_00062.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59830913,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00063.parquet",
+      "role": "train",
+      "shard": "train_00063.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60188592,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00064.parquet",
+      "role": "train",
+      "shard": "train_00064.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60158030,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00065.parquet",
+      "role": "train",
+      "shard": "train_00065.bin",
+      "docs_kept": 83966,
+      "docs_dropped": 2,
+      "tokens_train": 59985352,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00066.parquet",
+      "role": "train",
+      "shard": "train_00066.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 59878582,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-challenge": 1,
+        "arc-easy": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00067.parquet",
+      "role": "train",
+      "shard": "train_00067.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59741600,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 2,
+        "hellaswag": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00068.parquet",
+      "role": "train",
+      "shard": "train_00068.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 59811302,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00069.parquet",
+      "role": "train",
+      "shard": "train_00069.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60224586,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00070.parquet",
+      "role": "train",
+      "shard": "train_00070.bin",
+      "docs_kept": 83960,
+      "docs_dropped": 8,
+      "tokens_train": 59782048,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "arc-easy": 2,
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00071.parquet",
+      "role": "train",
+      "shard": "train_00071.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59868765,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00072.parquet",
+      "role": "train",
+      "shard": "train_00072.bin",
+      "docs_kept": 84991,
+      "docs_dropped": 1,
+      "tokens_train": 59710856,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00073.parquet",
+      "role": "train",
+      "shard": "train_00073.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59857050,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 2,
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00074.parquet",
+      "role": "train",
+      "shard": "train_00074.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 60221333,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00075.parquet",
+      "role": "train",
+      "shard": "train_00075.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 59817366,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00076.parquet",
+      "role": "train",
+      "shard": "train_00076.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59562768,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 2,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00077.parquet",
+      "role": "train",
+      "shard": "train_00077.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 59621425,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00078.parquet",
+      "role": "train",
+      "shard": "train_00078.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 60481218,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1,
+        "arc-easy": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00079.parquet",
+      "role": "train",
+      "shard": "train_00079.bin",
+      "docs_kept": 83958,
+      "docs_dropped": 10,
+      "tokens_train": 60277143,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 5,
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00080.parquet",
+      "role": "train",
+      "shard": "train_00080.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59883687,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00081.parquet",
+      "role": "train",
+      "shard": "train_00081.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60022219,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "piqa": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00082.parquet",
+      "role": "train",
+      "shard": "train_00082.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 59798014,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00083.parquet",
+      "role": "train",
+      "shard": "train_00083.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 60012896,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 6,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00084.parquet",
+      "role": "train",
+      "shard": "train_00084.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59572250,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00085.parquet",
+      "role": "train",
+      "shard": "train_00085.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 59739303,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00086.parquet",
+      "role": "train",
+      "shard": "train_00086.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60367063,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00087.parquet",
+      "role": "train",
+      "shard": "train_00087.bin",
+      "docs_kept": 83960,
+      "docs_dropped": 8,
+      "tokens_train": 59591702,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00088.parquet",
+      "role": "train",
+      "shard": "train_00088.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59610223,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00089.parquet",
+      "role": "train",
+      "shard": "train_00089.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 60220898,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 4,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00090.parquet",
+      "role": "train",
+      "shard": "train_00090.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 60110006,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 3,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00091.parquet",
+      "role": "train",
+      "shard": "train_00091.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 60048037,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00092.parquet",
+      "role": "train",
+      "shard": "train_00092.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 60188291,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00093.parquet",
+      "role": "train",
+      "shard": "train_00093.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60170301,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00094.parquet",
+      "role": "train",
+      "shard": "train_00094.bin",
+      "docs_kept": 83966,
+      "docs_dropped": 2,
+      "tokens_train": 59885786,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00095.parquet",
+      "role": "train",
+      "shard": "train_00095.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 60142957,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-challenge": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00096.parquet",
+      "role": "train",
+      "shard": "train_00096.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 60097340,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 6,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00097.parquet",
+      "role": "train",
+      "shard": "train_00097.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59921135,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00098.parquet",
+      "role": "train",
+      "shard": "train_00098.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60050519,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "piqa": 1,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00099.parquet",
+      "role": "train",
+      "shard": "train_00099.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 59678708,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00100.parquet",
+      "role": "train",
+      "shard": "train_00100.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60167532,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00101.parquet",
+      "role": "train",
+      "shard": "train_00101.bin",
+      "docs_kept": 84991,
+      "docs_dropped": 1,
+      "tokens_train": 59620973,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00102.parquet",
+      "role": "train",
+      "shard": "train_00102.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 60274883,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 1,
+        "piqa": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00103.parquet",
+      "role": "train",
+      "shard": "train_00103.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59902431,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00104.parquet",
+      "role": "train",
+      "shard": "train_00104.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 59942787,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00105.parquet",
+      "role": "train",
+      "shard": "train_00105.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60006464,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 2,
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00106.parquet",
+      "role": "train",
+      "shard": "train_00106.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 59896807,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00107.parquet",
+      "role": "train",
+      "shard": "train_00107.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 60207624,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00108.parquet",
+      "role": "train",
+      "shard": "train_00108.bin",
+      "docs_kept": 84990,
+      "docs_dropped": 2,
+      "tokens_train": 60174335,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00109.parquet",
+      "role": "train",
+      "shard": "train_00109.bin",
+      "docs_kept": 84983,
+      "docs_dropped": 9,
+      "tokens_train": 59672201,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 3,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00110.parquet",
+      "role": "train",
+      "shard": "train_00110.bin",
+      "docs_kept": 84990,
+      "docs_dropped": 2,
+      "tokens_train": 59810504,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00111.parquet",
+      "role": "train",
+      "shard": "train_00111.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 60217553,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00112.parquet",
+      "role": "train",
+      "shard": "train_00112.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59921921,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 3,
+        "piqa": 2,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00113.parquet",
+      "role": "train",
+      "shard": "train_00113.bin",
+      "docs_kept": 84982,
+      "docs_dropped": 10,
+      "tokens_train": 59815316,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 6,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00114.parquet",
+      "role": "train",
+      "shard": "train_00114.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60072468,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00115.parquet",
+      "role": "train",
+      "shard": "train_00115.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59851100,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 2,
+        "hellaswag": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00116.parquet",
+      "role": "train",
+      "shard": "train_00116.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59826649,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00117.parquet",
+      "role": "train",
+      "shard": "train_00117.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 60444310,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 2,
+        "hellaswag": 2,
+        "arc-challenge": 1,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00118.parquet",
+      "role": "train",
+      "shard": "train_00118.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 60332248,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00119.parquet",
+      "role": "train",
+      "shard": "train_00119.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 60046584,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 4,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00120.parquet",
+      "role": "train",
+      "shard": "train_00120.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60191599,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00121.parquet",
+      "role": "train",
+      "shard": "train_00121.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 59961131,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00122.parquet",
+      "role": "train",
+      "shard": "train_00122.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 59962075,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "arc-challenge": 2,
+        "hellaswag": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00123.parquet",
+      "role": "train",
+      "shard": "train_00123.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 59633947,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00124.parquet",
+      "role": "train",
+      "shard": "train_00124.bin",
+      "docs_kept": 83959,
+      "docs_dropped": 9,
+      "tokens_train": 59621081,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 3,
+        "hellaswag": 5,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00125.parquet",
+      "role": "train",
+      "shard": "train_00125.bin",
+      "docs_kept": 84983,
+      "docs_dropped": 9,
+      "tokens_train": 60293903,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "piqa": 1,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00126.parquet",
+      "role": "train",
+      "shard": "train_00126.bin",
+      "docs_kept": 83959,
+      "docs_dropped": 9,
+      "tokens_train": 60095477,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 3,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00127.parquet",
+      "role": "train",
+      "shard": "train_00127.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60176319,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00128.parquet",
+      "role": "train",
+      "shard": "train_00128.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59672436,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00129.parquet",
+      "role": "train",
+      "shard": "train_00129.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 59914134,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "piqa": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00130.parquet",
+      "role": "train",
+      "shard": "train_00130.bin",
+      "docs_kept": 84982,
+      "docs_dropped": 10,
+      "tokens_train": 60278719,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 6,
+        "piqa": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00131.parquet",
+      "role": "train",
+      "shard": "train_00131.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60150039,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-challenge": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00132.parquet",
+      "role": "train",
+      "shard": "train_00132.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59892089,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00133.parquet",
+      "role": "train",
+      "shard": "train_00133.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 59906757,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-easy": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00134.parquet",
+      "role": "train",
+      "shard": "train_00134.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 60001749,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 2,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00135.parquet",
+      "role": "train",
+      "shard": "train_00135.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60262185,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00136.parquet",
+      "role": "train",
+      "shard": "train_00136.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60181868,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00137.parquet",
+      "role": "train",
+      "shard": "train_00137.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60134756,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00138.parquet",
+      "role": "train",
+      "shard": "train_00138.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 59739375,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00139.parquet",
+      "role": "train",
+      "shard": "train_00139.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 59608943,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00140.parquet",
+      "role": "train",
+      "shard": "train_00140.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59605561,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 2,
+        "piqa": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00141.parquet",
+      "role": "train",
+      "shard": "train_00141.bin",
+      "docs_kept": 84982,
+      "docs_dropped": 10,
+      "tokens_train": 59886952,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 6,
+        "piqa": 1,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00142.parquet",
+      "role": "train",
+      "shard": "train_00142.bin",
+      "docs_kept": 83959,
+      "docs_dropped": 9,
+      "tokens_train": 59704097,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "piqa": 2,
+        "arc-easy": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00143.parquet",
+      "role": "train",
+      "shard": "train_00143.bin",
+      "docs_kept": 83966,
+      "docs_dropped": 2,
+      "tokens_train": 59759813,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00144.parquet",
+      "role": "train",
+      "shard": "train_00144.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 59883828,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00145.parquet",
+      "role": "train",
+      "shard": "train_00145.bin",
+      "docs_kept": 83962,
+      "docs_dropped": 6,
+      "tokens_train": 60144413,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00146.parquet",
+      "role": "train",
+      "shard": "train_00146.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59814806,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00147.parquet",
+      "role": "train",
+      "shard": "train_00147.bin",
+      "docs_kept": 82941,
+      "docs_dropped": 3,
+      "tokens_train": 59932946,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "arc-easy": 1,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00148.parquet",
+      "role": "train",
+      "shard": "train_00148.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 60066924,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "piqa": 1,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00149.parquet",
+      "role": "train",
+      "shard": "train_00149.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 60173978,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00150.parquet",
+      "role": "train",
+      "shard": "train_00150.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60220317,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "piqa": 1,
+        "arc-easy": 1,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00151.parquet",
+      "role": "train",
+      "shard": "train_00151.bin",
+      "docs_kept": 83968,
+      "docs_dropped": 0,
+      "tokens_train": 59929015,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {}
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00152.parquet",
+      "role": "train",
+      "shard": "train_00152.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 60203299,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00153.parquet",
+      "role": "train",
+      "shard": "train_00153.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59785786,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 1,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00154.parquet",
+      "role": "train",
+      "shard": "train_00154.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 60031140,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00155.parquet",
+      "role": "train",
+      "shard": "train_00155.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59851298,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 3,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00156.parquet",
+      "role": "train",
+      "shard": "train_00156.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59815832,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00157.parquet",
+      "role": "train",
+      "shard": "train_00157.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 60154446,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "arc-challenge": 1,
+        "arc-easy": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00158.parquet",
+      "role": "train",
+      "shard": "train_00158.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 59774328,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00159.parquet",
+      "role": "train",
+      "shard": "train_00159.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 60220786,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00160.parquet",
+      "role": "train",
+      "shard": "train_00160.bin",
+      "docs_kept": 86010,
+      "docs_dropped": 6,
+      "tokens_train": 60116410,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "arc-challenge": 1,
+        "piqa": 1,
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00161.parquet",
+      "role": "train",
+      "shard": "train_00161.bin",
+      "docs_kept": 83958,
+      "docs_dropped": 10,
+      "tokens_train": 59896797,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 1,
+        "piqa": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00162.parquet",
+      "role": "train",
+      "shard": "train_00162.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60311109,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00163.parquet",
+      "role": "train",
+      "shard": "train_00163.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 59880751,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00164.parquet",
+      "role": "train",
+      "shard": "train_00164.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 59583498,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 2,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00165.parquet",
+      "role": "train",
+      "shard": "train_00165.bin",
+      "docs_kept": 83960,
+      "docs_dropped": 8,
+      "tokens_train": 59702193,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "arc-easy": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00166.parquet",
+      "role": "train",
+      "shard": "train_00166.bin",
+      "docs_kept": 84983,
+      "docs_dropped": 9,
+      "tokens_train": 59894963,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 6,
+        "arc-easy": 1,
+        "piqa": 1,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00167.parquet",
+      "role": "train",
+      "shard": "train_00167.bin",
+      "docs_kept": 84989,
+      "docs_dropped": 3,
+      "tokens_train": 60060223,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00168.parquet",
+      "role": "train",
+      "shard": "train_00168.bin",
+      "docs_kept": 84985,
+      "docs_dropped": 7,
+      "tokens_train": 59964289,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 2,
+        "arc-easy": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00169.parquet",
+      "role": "train",
+      "shard": "train_00169.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 59735202,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 3,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00170.parquet",
+      "role": "train",
+      "shard": "train_00170.bin",
+      "docs_kept": 83966,
+      "docs_dropped": 2,
+      "tokens_train": 59819813,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00171.parquet",
+      "role": "train",
+      "shard": "train_00171.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60084266,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 4
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00172.parquet",
+      "role": "train",
+      "shard": "train_00172.bin",
+      "docs_kept": 83965,
+      "docs_dropped": 3,
+      "tokens_train": 59654386,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00173.parquet",
+      "role": "train",
+      "shard": "train_00173.bin",
+      "docs_kept": 84988,
+      "docs_dropped": 4,
+      "tokens_train": 60417087,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00174.parquet",
+      "role": "train",
+      "shard": "train_00174.bin",
+      "docs_kept": 82934,
+      "docs_dropped": 10,
+      "tokens_train": 60095021,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 9,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00175.parquet",
+      "role": "train",
+      "shard": "train_00175.bin",
+      "docs_kept": 84990,
+      "docs_dropped": 2,
+      "tokens_train": 60176345,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00176.parquet",
+      "role": "train",
+      "shard": "train_00176.bin",
+      "docs_kept": 83963,
+      "docs_dropped": 5,
+      "tokens_train": 59747045,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 3,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00177.parquet",
+      "role": "train",
+      "shard": "train_00177.bin",
+      "docs_kept": 84984,
+      "docs_dropped": 8,
+      "tokens_train": 60025015,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 3,
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00178.parquet",
+      "role": "train",
+      "shard": "train_00178.bin",
+      "docs_kept": 84986,
+      "docs_dropped": 6,
+      "tokens_train": 59802003,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 3,
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00179.parquet",
+      "role": "train",
+      "shard": "train_00179.bin",
+      "docs_kept": 83961,
+      "docs_dropped": 7,
+      "tokens_train": 59822071,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "hellaswag": 5,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00180.parquet",
+      "role": "train",
+      "shard": "train_00180.bin",
+      "docs_kept": 83964,
+      "docs_dropped": 4,
+      "tokens_train": 59921546,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 1,
+        "arc-challenge": 1,
+        "hellaswag": 2
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00181.parquet",
+      "role": "train",
+      "shard": "train_00181.bin",
+      "docs_kept": 86010,
+      "docs_dropped": 6,
+      "tokens_train": 59817891,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 3,
+        "piqa": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00182.parquet",
+      "role": "train",
+      "shard": "train_00182.bin",
+      "docs_kept": 84987,
+      "docs_dropped": 5,
+      "tokens_train": 60076846,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 4,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00183.parquet",
+      "role": "train",
+      "shard": "train_00183.bin",
+      "docs_kept": 84990,
+      "docs_dropped": 2,
+      "tokens_train": 59737404,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 1,
+        "piqa": 1
+      }
+    },
+    {
+      "repo": "karpathy/climbmix-400b-shuffle",
+      "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+      "file": "shard_00184.parquet",
+      "role": "train",
+      "shard": "train_00184.bin",
+      "docs_kept": 84983,
+      "docs_dropped": 9,
+      "tokens_train": 59752752,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 5,
+        "arc-easy": 1,
+        "piqa": 2,
+        "arc-challenge": 1
+      }
+    }
+  ]
+}

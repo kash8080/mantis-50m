@@ -1,0 +1,208 @@
+{
+  "source": "finemath",
+  "licence": "ODC-BY",
+  "totals": {
+    "docs_kept": 1151365,
+    "docs_dropped": 115,
+    "tokens_train": 1933031660,
+    "tokens_val": 3303625
+  },
+  "files": [
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00000-of-00064.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 104671,
+      "docs_dropped": 9,
+      "tokens_train": 172598237,
+      "tokens_val": 3303625,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "piqa": 3,
+        "hellaswag": 3,
+        "arc-challenge": 1,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00001-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00001.bin",
+      "docs_kept": 104669,
+      "docs_dropped": 11,
+      "tokens_train": 177914003,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 6,
+        "arc-easy": 4,
+        "hellaswag": 1
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00002-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00002.bin",
+      "docs_kept": 104673,
+      "docs_dropped": 7,
+      "tokens_train": 177281255,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "piqa": 2,
+        "hellaswag": 2,
+        "arc-challenge": 1
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00003-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00003.bin",
+      "docs_kept": 104670,
+      "docs_dropped": 10,
+      "tokens_train": 175001405,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 1,
+        "hellaswag": 3,
+        "arc-easy": 3,
+        "piqa": 3
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00004-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00004.bin",
+      "docs_kept": 104667,
+      "docs_dropped": 13,
+      "tokens_train": 174665531,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 2,
+        "piqa": 4,
+        "arc-challenge": 2,
+        "hellaswag": 5
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00005-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00005.bin",
+      "docs_kept": 104670,
+      "docs_dropped": 10,
+      "tokens_train": 174264395,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-challenge": 2,
+        "piqa": 2,
+        "hellaswag": 2,
+        "arc-easy": 4
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00006-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00006.bin",
+      "docs_kept": 104673,
+      "docs_dropped": 7,
+      "tokens_train": 174898774,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 2,
+        "hellaswag": 2,
+        "arc-challenge": 1,
+        "arc-easy": 2
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00007-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00007.bin",
+      "docs_kept": 104672,
+      "docs_dropped": 8,
+      "tokens_train": 175949929,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 3,
+        "arc-challenge": 2,
+        "hellaswag": 2,
+        "arc-easy": 1
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00008-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00008.bin",
+      "docs_kept": 104663,
+      "docs_dropped": 17,
+      "tokens_train": 176054970,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "arc-easy": 3,
+        "piqa": 6,
+        "hellaswag": 6,
+        "arc-challenge": 2
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00009-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00009.bin",
+      "docs_kept": 104668,
+      "docs_dropped": 12,
+      "tokens_train": 177742133,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 4,
+        "arc-easy": 5,
+        "hellaswag": 3
+      }
+    },
+    {
+      "repo": "HuggingFaceTB/finemath",
+      "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+      "file": "finemath-4plus/train-00010-of-00064.parquet",
+      "role": "train",
+      "shard": "train_00010.bin",
+      "docs_kept": 104669,
+      "docs_dropped": 11,
+      "tokens_train": 176661028,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "piqa": 5,
+        "hellaswag": 2,
+        "arc-easy": 2,
+        "arc-challenge": 2
+      }
+    }
+  ]
+}

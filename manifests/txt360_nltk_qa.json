@@ -1,0 +1,30 @@
+{
+  "source": "txt360_nltk_qa",
+  "licence": "CC-BY-4.0",
+  "totals": {
+    "docs_kept": 644964,
+    "docs_dropped": 52,
+    "tokens_train": 1450163146,
+    "tokens_val": 4245858
+  },
+  "files": [
+    {
+      "repo": "IFM/TxT360-v2",
+      "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+      "file": "web-high-nltk-qa/nltk-web-QS-shuffled-High-randomized-questions_merged.chunk0-b16aaf3f69-00000.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 644964,
+      "docs_dropped": 52,
+      "tokens_train": 1450163146,
+      "tokens_val": 4245858,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "hellaswag": 37,
+        "arc-easy": 8,
+        "piqa": 6,
+        "arc-challenge": 1
+      }
+    }
+  ]
+}

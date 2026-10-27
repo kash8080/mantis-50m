@@ -1,0 +1,241 @@
+{
+ "total_bytes": 2000000000.0,
+ "seed": 0,
+ "mix": {
+  "climbmix": 0.45,
+  "txt360_web": 0.12,
+  "fineweb_edu": 0.1,
+  "cosmopedia_v2": 0.05,
+  "wikihow": 0.02,
+  "finemath": 0.07,
+  "txt360_qa": 0.04,
+  "txt360_nltk_qa": 0.04,
+  "word_problems": 0.04,
+  "arith": 0.07
+ },
+ "built": "25 Oct 2026",
+ "sources": {
+  "climbmix": {
+   "weight": 0.45,
+   "budget_bytes": 900000000,
+   "licence": "MIT (reshuffle), upstream CC-BY-NC-4.0",
+   "parts": [
+    {
+     "repo": "karpathy/climbmix-400b-shuffle",
+     "revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+     "prefix": "",
+     "files": [
+      {
+       "file": "shard_00000.parquet",
+       "rows": 86016,
+       "bytes": 253231981
+      },
+      {
+       "file": "shard_00001.parquet",
+       "rows": 86016,
+       "bytes": 252774693
+      },
+      {
+       "file": "shard_00002.parquet",
+       "rows": 84992,
+       "bytes": 252462785
+      },
+      {
+       "file": "shard_00003.parquet",
+       "rows": 47096,
+       "bytes": 141531116
+      }
+     ]
+    }
+   ],
+   "bytes": 900000575
+  },
+  "txt360_web": {
+   "weight": 0.12,
+   "budget_bytes": 240000000,
+   "licence": "CC-BY-4.0",
+   "parts": [
+    {
+     "repo": "IFM/TxT360-v2",
+     "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+     "prefix": "web-high-medium/",
+     "files": [
+      {
+       "file": "web-high-medium/Medium-High.chunk0-9fc7d32df3-00000.parquet",
+       "rows": 46324,
+       "bytes": 240016100
+      }
+     ]
+    }
+   ],
+   "bytes": 240016100
+  },
+  "fineweb_edu": {
+   "weight": 0.1,
+   "budget_bytes": 200000000,
+   "licence": "ODC-BY",
+   "parts": [
+    {
+     "repo": "HuggingFaceTB/smollm-corpus",
+     "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+     "prefix": "fineweb-edu-dedup/",
+     "files": [
+      {
+       "file": "fineweb-edu-dedup/train-00000-of-00234.parquet",
+       "rows": 42044,
+       "bytes": 200003177
+      }
+     ]
+    }
+   ],
+   "bytes": 200003177
+  },
+  "cosmopedia_v2": {
+   "weight": 0.05,
+   "budget_bytes": 100000000,
+   "licence": "ODC-BY",
+   "parts": [
+    {
+     "repo": "HuggingFaceTB/smollm-corpus",
+     "revision": "3ba9d605774198c5868892d7a8deda78031a781f",
+     "prefix": "cosmopedia-v2/",
+     "files": [
+      {
+       "file": "cosmopedia-v2/train-00000-of-00104.parquet",
+       "rows": 26729,
+       "bytes": 100001146
+      }
+     ]
+    }
+   ],
+   "bytes": 100001146
+  },
+  "wikihow": {
+   "weight": 0.02,
+   "budget_bytes": 40000000,
+   "licence": "Apache-2.0",
+   "parts": [
+    {
+     "repo": "HuggingFaceTB/cosmopedia",
+     "revision": "0ae6ec63f91742bd2d1eaef4f02232c55d719385",
+     "prefix": "data/wikihow/",
+     "files": [
+      {
+       "file": "data/wikihow/train-00000-of-00002.parquet",
+       "rows": 8765,
+       "bytes": 40000750
+      }
+     ]
+    }
+   ],
+   "bytes": 40000750
+  },
+  "finemath": {
+   "weight": 0.07,
+   "budget_bytes": 140000000,
+   "licence": "ODC-BY",
+   "parts": [
+    {
+     "repo": "HuggingFaceTB/finemath",
+     "revision": "e92b25a616738fe95dc186b64dfb19f9c8525594",
+     "prefix": "finemath-4plus/",
+     "files": [
+      {
+       "file": "finemath-4plus/train-00000-of-00064.parquet",
+       "rows": 27346,
+       "bytes": 140000946
+      }
+     ]
+    }
+   ],
+   "bytes": 140000946
+  },
+  "txt360_qa": {
+   "weight": 0.04,
+   "budget_bytes": 80000000,
+   "licence": "CC-BY-4.0",
+   "parts": [
+    {
+     "repo": "IFM/TxT360-v2",
+     "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+     "prefix": "txt360-qa/",
+     "files": [
+      {
+       "file": "txt360-qa/TxT360-QA.chunk0-992fabba86-00000.parquet",
+       "rows": 7854,
+       "bytes": 80003273
+      }
+     ]
+    }
+   ],
+   "bytes": 80003273
+  },
+  "txt360_nltk_qa": {
+   "weight": 0.04,
+   "budget_bytes": 80000000,
+   "licence": "CC-BY-4.0",
+   "parts": [
+    {
+     "repo": "IFM/TxT360-v2",
+     "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+     "prefix": "web-high-nltk-qa/",
+     "files": [
+      {
+       "file": "web-high-nltk-qa/nltk-web-QS-shuffled-High-randomized-questions_merged.chunk0-b16aaf3f69-00000.parquet",
+       "rows": 9538,
+       "bytes": 80000946
+      }
+     ]
+    }
+   ],
+   "bytes": 80000946
+  },
+  "word_problems": {
+   "weight": 0.04,
+   "budget_bytes": 80000000,
+   "licence": "CC-BY-4.0 and MIT",
+   "parts": [
+    {
+     "repo": "nvidia/OpenMathInstruct-2",
+     "revision": "469216e3f46f4dacf476b382e192485ea51a143e",
+     "prefix": "data/train-",
+     "files": [
+      {
+       "file": "data/train-00000-of-00032.parquet",
+       "rows": 52006,
+       "bytes": 40000603
+      }
+     ]
+    },
+    {
+     "repo": "microsoft/orca-math-word-problems-200k",
+     "revision": "29255d1770cc4eac66e5e7fa378cba542c026350",
+     "prefix": "data/",
+     "files": [
+      {
+       "file": "data/train-00000-of-00001.parquet",
+       "rows": 40153,
+       "bytes": 40001077
+      }
+     ]
+    }
+   ],
+   "bytes": 80001680
+  },
+  "arith": {
+   "weight": 0.07,
+   "budget_bytes": 140000000,
+   "licence": "ours (src/slm50m/arith)",
+   "parts": [
+    {
+     "repo": null,
+     "generated": {
+      "rows": 146998,
+      "bytes": 140000778
+     }
+    }
+   ],
+   "bytes": 140000778
+  }
+ }
+}

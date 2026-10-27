@@ -1,0 +1,57 @@
+[project]
+name = "slm-50m"
+version = "0.0.1"
+description = "A sub-50M parameter language model pretrained from scratch on a $30 Modal budget, aimed at the Open SLM Leaderboard"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+# Exact pins for the packages that decide numbers (D-035). Everything else is locked in uv.lock
+dependencies = [
+    "huggingface-hub>=2.3.0",
+    "lm-eval[hf]==0.4.12",
+    "modal==1.6.2",
+    "numpy>=2.5.4",
+    "pyarrow>=26.0.0",
+    "safetensors>=0.8.0",
+    "sentencepiece>=0.2.2",
+    "tokenizers==0.23.3",
+    "torch==2.14.1",
+    "transformers==5.20.2",
+]
+
+# Command-line entry points, one cli.py per stage (D-037). `uv sync` installs them
+[project.scripts]
+slm-build-tokenizer-corpus = "slm50m.tokenizer_corpus.cli:main"
+slm-train-tokenizer = "slm50m.tokenizer.cli:main"
+slm-prep-local = "slm50m.dataprep.cli:main"
+slm-train = "slm50m.training.cli:train"
+slm-status = "slm50m.training.cli:status"
+slm-plot = "slm50m.training.cli:plot"
+slm-export-hf = "slm50m.model.cli:main"
+slm-evaluate = "slm50m.evaluation.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.11.0,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "slm50m"
+module-root = "src"
+
+[dependency-groups]
+dev = [
+    "matplotlib>=3.11.2",
+    "pytest>=9.1.1",
+    "ruff>=0.17.2",
+]
+
+[tool.uv]
+package = true
+python-preference = "managed"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = ["network: downloads a dataset the first time (skip with -m 'not network')"]
+
+[tool.ruff]
+line-length = 120

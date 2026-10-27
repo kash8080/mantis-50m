@@ -1,0 +1,61 @@
+{
+  "source": "txt360_web",
+  "licence": "CC-BY-4.0",
+  "totals": {
+    "docs_kept": 2792339,
+    "docs_dropped": 108,
+    "tokens_train": 3710840807,
+    "tokens_val": 2731681
+  },
+  "files": [
+    {
+      "repo": "IFM/TxT360-v2",
+      "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+      "file": "web-high-medium/Medium-High.chunk0-9fc7d32df3-00000.parquet",
+      "role": "val+train",
+      "shard": "train_00000.bin",
+      "docs_kept": 928011,
+      "docs_dropped": 32,
+      "tokens_train": 1235524774,
+      "tokens_val": 2731681,
+      "val_docs": 2000,
+      "dropped_by_benchmark": {
+        "hellaswag": 30,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "IFM/TxT360-v2",
+      "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+      "file": "web-high-medium/Medium-High.chunk0-9fc7d32df3-00001.parquet",
+      "role": "train",
+      "shard": "train_00001.bin",
+      "docs_kept": 932140,
+      "docs_dropped": 33,
+      "tokens_train": 1236966819,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 31,
+        "piqa": 2
+      }
+    },
+    {
+      "repo": "IFM/TxT360-v2",
+      "revision": "a86bdfb101ebaaf71b445f95fb0f9b9bc2a47511",
+      "file": "web-high-medium/Medium-High.chunk0-9fc7d32df3-00002.parquet",
+      "role": "train",
+      "shard": "train_00002.bin",
+      "docs_kept": 932188,
+      "docs_dropped": 43,
+      "tokens_train": 1238349214,
+      "tokens_val": 0,
+      "val_docs": 0,
+      "dropped_by_benchmark": {
+        "hellaswag": 40,
+        "arc-easy": 2,
+        "piqa": 1
+      }
+    }
+  ]
+}
