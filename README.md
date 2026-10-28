@@ -4,7 +4,6 @@ A language model with **49.3M parameters**, pretrained from scratch on about **$
 
 - **Model:** [kash8080/Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) (coming soon)
 - **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF) (coming soon)
-- **Write-ups:** [rahulkashyap.dev](https://rahulkashyap.dev)
 
 ## Results
 
@@ -50,7 +49,7 @@ Every source is pinned to an HF commit in `src/slm50m/dataprep/sources.py`. Toke
 
 ## Repo layout
 
-One folder per pipeline stage. Tests mirror the same folders. Comments cite design decisions as `D-0xx`; the write-ups on [rahulkashyap.dev](https://rahulkashyap.dev) explain them.
+One folder per pipeline stage. Tests mirror the same folders. Comments cite design decisions as `D-0xx`, from the project's design log.
 
 ```
 src/slm50m/

@@ -394,8 +394,10 @@ RELEASE_CONTAINER_HOUR = 2 * CPU_CORE_HOUR + 4 * MEM_GIB_HOUR  # 2 cores, 4 GiB
 
 @app.function(image=image, scaledown_window=IDLE, volumes={RUNS: runs_vol}, secrets=[hf_secret], cpu=2, memory=4096,
               timeout=1800)
-def _upload_release(repo_id: str, files: dict[str, bytes], private: bool) -> str:
-    """Rebuild the release folder from the Mac's small files plus the Volume's weights, then push it to the Hub."""
+def _upload_release(repo_id: str, files: dict[str, bytes], volume_files: dict[str, tuple[str, str]], private: bool,
+                    message: str) -> str:
+    """Rebuild the release folder from the Mac's small files plus big files from the Volume (each checked against
+    its sha256), then push it to the Hub in one commit."""
     import hashlib
     import shutil
     import tempfile
@@ -405,35 +407,67 @@ def _upload_release(repo_id: str, files: dict[str, bytes], private: bool) -> str
     role = ((whoami().get("auth") or {}).get("accessToken") or {}).get("role")  # "read", "write" or "fineGrained"
     if role == "read":
         raise RuntimeError("the 'huggingface' secret holds a read token: replace it with a write token")
-    weights = Path(RUNS) / RELEASE_WEIGHTS
-    sha = hashlib.sha256(weights.read_bytes()).hexdigest()
-    if sha != RELEASE_SHA256:
-        raise RuntimeError(f"{weights} sha256 {sha} is not the scored export {RELEASE_SHA256}")
+    runs_vol.reload()
     with tempfile.TemporaryDirectory() as tmp:
         for name, blob in files.items():
             (Path(tmp) / name).parent.mkdir(parents=True, exist_ok=True)
             (Path(tmp) / name).write_bytes(blob)
-        shutil.copy(weights, Path(tmp) / "model.safetensors")
+        for name, (vol_path, expected) in volume_files.items():
+            src = Path(RUNS) / vol_path
+            sha = hashlib.sha256(src.read_bytes()).hexdigest()
+            if sha != expected:
+                raise RuntimeError(f"{src} sha256 {sha}, expected {expected}")
+            shutil.copy(src, Path(tmp) / name)
         api = HfApi()
-        api.create_repo(repo_id, private=private, exist_ok=True)
-        commit = api.upload_folder(folder_path=tmp, repo_id=repo_id,
-                                   commit_message="Mantis-50M: final checkpoint (step 34,000), model card, evals")
+        if not volume_files and not api.repo_exists(repo_id):
+            raise RuntimeError(f"{repo_id} does not exist: a card-only upload would make a repo with no weights")
+        api.create_repo(repo_id, private=private, exist_ok=True)  # an existing repo keeps its visibility
+        commit = api.upload_folder(folder_path=tmp, repo_id=repo_id, commit_message=message)
     return f"{_hf_user()} ({role} token) -> {commit.commit_url}"
 
 
 @app.local_entrypoint()
 def upload_release(repo: str = "kash8080/Mantis-50M", folder: str = "_build/release/Mantis-50M", public: bool = False,
-                   yes: bool = False):
-    """Private repo unless --public. Small files come from the Mac folder, the weights from the Volume."""
+                   cards_only: bool = False, yes: bool = False):
+    """Private repo unless --public. Small files come from the Mac folder. model.safetensors always comes from the
+    scored export on the Volume. .gguf files are copied to the Volume first (free) and checked again in the container.
+    --cards-only sends just README.md to a repo that already exists: no weights read, visibility unchanged.
+
+        uv run modal run modal_app.py::upload_release --repo kash8080/Mantis-50M-GGUF --folder _build/release/Mantis-50M-GGUF
+        uv run modal run modal_app.py::upload_release --cards-only
+    """
+    import hashlib
+
     root = Path(folder)
+    big = [p for p in sorted(root.rglob("*")) if p.suffix in (".safetensors", ".gguf")]
     files = {str(p.relative_to(root)): p.read_bytes() for p in sorted(root.rglob("*"))
-             if p.is_file() and p.name not in ("model.safetensors", ".DS_Store")}
-    for name in ("README.md", "config.json", "generation_config.json", "tokenizer.json", "tokenizer_config.json"):
+             if p.is_file() and p not in big and p.name != ".DS_Store"}
+    if cards_only:
+        files = {name: blob for name, blob in files.items() if name == "README.md"}
+        big = []
+    ggufs = [p for p in big if p.suffix == ".gguf"]
+    required = ["README.md"] + ([] if ggufs or cards_only else ["config.json", "generation_config.json",
+                                                                "tokenizer.json", "tokenizer_config.json"])
+    for name in required:
         if name not in files:
             raise SystemExit(f"{folder}/{name} is missing")
-    print(f"{repo} ({'public' if public else 'private'}): model.safetensors from the Volume + {sorted(files)}")
+    if cards_only:
+        volume_files, message = {}, "Update model card"
+    elif ggufs:
+        volume_files = {p.name: (f"release/{p.name}", hashlib.sha256(p.read_bytes()).hexdigest()) for p in ggufs}
+        message = f"{root.name}: {', '.join(p.name for p in ggufs)}, model card"
+    else:
+        volume_files = {"model.safetensors": (RELEASE_WEIGHTS, RELEASE_SHA256)}
+        message = "Mantis-50M: final checkpoint (step 34,000), model card, evals"
+    visibility = "visibility unchanged" if cards_only else "public" if public else "private"
+    print(f"{repo} ({visibility}): {sorted(volume_files)} from the Volume + {sorted(files)}")
     confirm(f"upload {repo}", RELEASE_CONTAINER_HOUR * 0.5 * OVERHEAD + 0.01, yes)
-    print(_upload_release.remote(repo, files, not public))
+    if ggufs:
+        with runs_vol.batch_upload(force=True) as batch:
+            for p in ggufs:
+                batch.put_file(str(p), f"/release/{p.name}")
+        print(f"copied {[p.name for p in ggufs]} to slm50m-runs:/release/")
+    print(_upload_release.remote(repo, files, volume_files, not public, message))
 
 
 KERNEL_KINDS = [  # first match wins, on the lowercased kernel name

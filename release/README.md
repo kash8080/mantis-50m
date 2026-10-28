@@ -25,7 +25,6 @@ Mantis-50M is a **49.3M parameter** base language model, pretrained from scratch
 
 - **Code:** [github.com/kash8080/mantis-50m](https://github.com/kash8080/mantis-50m)
 - **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF)
-- **Write-ups:** [rahulkashyap.dev](https://rahulkashyap.dev)
 
 It is a plain base model: no instruction tuning, no chat template. It continues text.
 
