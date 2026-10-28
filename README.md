@@ -1,52 +1,73 @@
-# SLM-50M
+# Mantis-50M
 
-A language model with **under 50M parameters**, pretrained from scratch on about **$30 of Modal credits**, aimed at the **#1 spot in the under-50M class** of the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard).
+A language model with **49.3M parameters**, pretrained from scratch on about **$30 of Modal credits**. It scores an Intelligence Index of **30.05** on the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard), against **17.93** for the best under-50M model listed on 28 Oct 2026.
 
-**Status (24 Oct 2026): gate 0 code written, tests pass on the Mac.** Nothing run on Modal yet. Every design decision is in [docs/decisions.md](docs/decisions.md). Next is gate 1: tokenizer and data.
+- **Model:** [kash8080/Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) (coming soon)
+- **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF) (coming soon)
+- **Write-ups:** [rahulkashyap.dev](https://rahulkashyap.dev)
 
-## Why this can work
+## Results
 
-- The leaderboard ranks by an **Intelligence Index**: HellaSwag, ARC, PIQA and ArithMark-3 (grade-school arithmetic), each normalized against random guessing
-- The under-50M #1 scores **17.93**, and every model in that class sits at 35-40% on ArithMark (chance is 25%)
-- A small model trained on good web data plus a lot of our own synthetic arithmetic should reach **~20-25**. Details in [docs/01-goal-and-leaderboard.md](docs/01-goal-and-leaderboard.md)
+Zero-shot, with the leaderboard's own tools: lm-eval 0.4.12 (`acc_norm`, fp32) for the first four, the official ArithMark-3 script for the fifth. The released model is the final checkpoint at the end of training, not one picked by benchmark score.
 
-## The plan in one view
+| Model | Params | HellaSwag | ARC-E | ARC-C | PIQA | ArithMark | II |
+|---|---|---|---|---|---|---|---|
+| **Mantis-50M** | 49.32M | **34.43** | **46.17** | **26.02** | **64.85** | **85.70** | **30.05** |
+| 50M-pro (under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
+| KLM-1.5 (under-100M #1) | 99.0M | 43.74 | 59.68 | 32.68 | 68.55 | 48.20 | 30.26 |
 
-| Area | Plan | Status |
-|---|---|---|
-| Size | **49,322,240** total params (tied embedding counted once) | Decided |
-| Architecture | Dense Qwen3-style decoder, 25 layers x 384, 6 / 2 KV heads, SwiGLU 1,152, QK-norm, RoPE, tied embeddings. Exports as `Qwen3ForCausalLM`, quantizes with llama.cpp | Decided |
-| Tokenizer | Own byte-level BPE, 16,384, one token per digit (SmolLM2's pre-tokenizer) | Decided |
-| Data | 45% ClimbMix + TxT360-v2, FineWeb-Edu, Cosmopedia, FineMath, word problems, 7% synthetic arithmetic. Shifts toward edu, Q&A and math in the decay. Benchmark 13-gram filter. Mixed in every batch | Decided, weights confirmed at gate 4 |
-| Training | Token-Superposition Training (bags of 6) for the first 30%, `torch.optim.Muon` + AdamW, WSD with 1-sqrt decay over the last 20%, context 1,024, batch 262k tokens | Decided, TST and Muon confirmed at gate 4 |
-| Licence | CC-BY-NC-4.0 (ClimbMix is NC upstream) | Decided |
-| Compute | Modal. ~4.4h on one H100 (~$18.30, $19 budget) for the main run, cheap GPUs for tests and evals | Decided |
-| Safety | Staged gates, checkpoints every ~20 min, exact resume, budget hard stop | Decided |
-| Monitoring | Per-source val loss, arithmetic proxy, real benchmarks every ~1B tokens, alerts | Decided |
-| Release | Final checkpoint at the end of the decay, all eval JSON kept, GGUF 8-bit and 4-bit | Decided |
-| Next | ~96M model next month for the under-100M class | Decided |
+## The model
+
+| Area | What we did |
+|---|---|
+| Architecture | Dense Qwen3-style decoder, 25 layers x 384, 6 query / 2 KV heads, SwiGLU 1,152, QK-norm, RoPE (theta 100k), tied embeddings. **49,322,240** params |
+| Export | Loads as a standard `Qwen3ForCausalLM` in transformers, no custom code. Converts and quantizes with llama.cpp (Q8_0, Q4_K_M) |
+| Tokenizer | Own byte-level BPE, 16,384 tokens, one token per digit |
+| Training | ~8.9B tokens, context 1,024, batch 262k tokens, 34,000 steps on one H100. Token-Superposition Training (bags of 6) for the first 30%, Muon + AdamW, warmup-stable-decay schedule with a 1-sqrt decay over the last 20%, bf16 |
+| Data | Web, educational, Q&A and math text (below), plus our own synthetic arithmetic. The mix shifts toward edu, how-to, Q&A and math in the decay |
+| Decontamination | Every training document that shares a 13-word n-gram with HellaSwag, ARC, PIQA or ArithMark is dropped (1,474 of 28.9M). The arithmetic generator has zero exact and zero 13-gram matches with ArithMark. See [docs/filter-report.md](docs/filter-report.md) |
+
+## Data
+
+| Source | Licence | Stable mix | Decay mix |
+|---|---|---|---|
+| [ClimbMix](https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle) | MIT on the reshuffle, CC-BY-NC-4.0 upstream | 45% | 20% |
+| [TxT360-v2](https://huggingface.co/datasets/IFM/TxT360-v2) web | CC-BY-4.0 | 12% | 6% |
+| TxT360-v2 QA (`txt360-qa`, `web-high-nltk-qa`) | CC-BY-4.0 | 8% | 14% |
+| [FineWeb-Edu dedup](https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus) | ODC-BY | 10% | 14% |
+| [Cosmopedia v2](https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus) | ODC-BY | 5% | 9% |
+| [Cosmopedia WikiHow](https://huggingface.co/datasets/HuggingFaceTB/cosmopedia) | Apache-2.0 | 2% | 9% |
+| [FineMath-4plus](https://huggingface.co/datasets/HuggingFaceTB/finemath) | ODC-BY | 7% | 8% |
+| Word problems: [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) (GSM8K-type rows) and [Orca-Math](https://huggingface.co/datasets/microsoft/orca-math-word-problems-200k) | CC-BY-4.0, MIT | 4% | 8% |
+| Synthetic arithmetic, generated by `src/slm50m/arith/` | ours | 7% (v1) | 12% (v2) |
+
+Every source is pinned to an HF commit in `src/slm50m/dataprep/sources.py`. Token counts per source are in `manifests/`.
+
+## Licences
+
+- **Code** in this repo: [Apache-2.0](LICENSE)
+- **Model weights:** CC-BY-NC-4.0, because ClimbMix is non-commercial upstream
 
 ## Repo layout
 
-One folder per pipeline stage (D-037). Tests mirror the same folders.
+One folder per pipeline stage. Tests mirror the same folders. Comments cite design decisions as `D-0xx`; the write-ups on [rahulkashyap.dev](https://rahulkashyap.dev) explain them.
 
 ```
 src/slm50m/
-  config.py      model presets (main 49.3M, proxy 13.6M, test), mix weights, RunConfig
-  tokenizer_corpus/  build the tokenizer's ~2 GB training corpus in data/tokenizer/
-  tokenizer/     train the BPE tokenizer on that corpus
-  arith/         synthetic arithmetic generator and the 4-choice proxy eval
-  dataprep/      sources, benchmark 13-gram filter, parquet -> token shards + manifests, mixture sampler
-  model/         the Qwen3-style decoder and its export to Qwen3ForCausalLM
-  training/      loss, TST, Muon + AdamW, WSD schedule, checkpoints, metrics + alerts, the training loop
-  evaluation/    lm-eval + ArithMark + Intelligence Index, with versions
-scripts/         setup_llama_cpp.sh only. Python commands live in each stage's cli.py (uv run slm-<name>, listed in pyproject.toml)
-configs/         run configs: smoke (gate 2), proxy_baseline (gate 4), main (gate 5)
-data/            data we download or sample. Gitignored except each folder's README.md and manifest.json
-outputs/         what we produce and keep, e.g. outputs/tokenizer/ (the trained tokenizer, committed)
-modal_app.py     Modal image, Volumes and functions. Paid calls print the cost and ask first
-tests/           gate 0 tests
-docs/            design docs, decision log, open questions, experiment log (start at docs/README.md)
+  config.py          model presets (main 49.3M, proxy 13.6M, test), mix weights, RunConfig
+  tokenizer_corpus/  build the tokenizer's ~2 GB training corpus
+  tokenizer/         train the BPE tokenizer
+  arith/             synthetic arithmetic generators (v1, v2) and the proxy evals
+  dataprep/          sources, benchmark 13-gram filter, parquet -> token shards + manifests, mixture sampler
+  model/             the Qwen3-style decoder and its export to Qwen3ForCausalLM
+  training/          loss, TST, Muon + AdamW, WSD schedule, checkpoints, metrics + alerts, the training loop
+  evaluation/        lm-eval + ArithMark + Intelligence Index, with versions
+configs/             run configs: smoke, proxy ablations, main
+manifests/           per-source token counts and filter drops
+outputs/tokenizer/   the trained tokenizer
+modal_app.py         Modal image, Volumes and functions. Paid calls print the cost and ask first
+scripts/             setup_llama_cpp.sh (llama.cpp build for the GGUF test)
+tests/               pytest suite
 ```
 
 ## Setup
@@ -56,38 +77,26 @@ uv sync
 ```
 
 ```bash
-uv run pytest
+uv run pytest -m "not network"
 ```
 
-`uv run pytest -m "not network"` skips the one test that downloads HellaSwag. The GGUF test skips until llama.cpp is built with `bash scripts/setup_llama_cpp.sh` (needs `brew install cmake`).
-
-```bash
-uv run modal setup
-```
-
+`-m "not network"` skips the one test that downloads HellaSwag. The GGUF test skips until llama.cpp is built with `bash scripts/setup_llama_cpp.sh` (needs `brew install cmake`). Modal needs `uv run modal setup` and a Modal secret `huggingface` holding `HF_TOKEN`.
 
 ## Commands
 
 | What | Command |
 |---|---|
-| Build the tokenizer corpus (gate 1) | `uv run slm-build-tokenizer-corpus --gb 2` |
-| Train the tokenizer (gate 1) | `uv run slm-train-tokenizer` |
+| Build the tokenizer corpus | `uv run slm-build-tokenizer-corpus --gb 2` |
+| Train the tokenizer | `uv run slm-train-tokenizer` |
 | Benchmark items for the filter | `uv run modal run modal_app.py::prep_benchmarks` |
 | Prep a source into shards | `uv run modal run modal_app.py::prep --source wikihow --n-files 1` |
 | Local data from the tokenizer corpus (Mac) | `uv run slm-prep-local` |
 | Train locally (Mac smoke test, ~8 min) | `uv run slm-train configs/mac.json` |
-| Train on Modal | `uv run modal run modal_app.py::run_train --config configs/smoke.json --gpu L4 --hours 0.4` |
-| Throughput (gate 3) | `uv run modal run modal_app.py::run_benchmark --gpu H100 --data` |
+| Train on Modal | `uv run modal run modal_app.py::run_train --config configs/main.json --gpu H100 --hours 5.5` |
 | Run status | `uv run slm-status <run_dir>/metrics.jsonl` |
 | Run charts (open `<run_dir>/plots.html`) | `uv run slm-plot <run_dir> --watch 30` |
 | Export / evaluate | `uv run slm-export-hf <ckpt> <out>`, `uv run slm-evaluate <ckpt> <out>` |
 
 ## Budget
 
-$30 of Modal Starter credits (they reset monthly). Breakdown in [docs/06-infra-modal.md](docs/06-infra-modal.md): ~$16 main run, ~$5-9 for data prep, tests and evals, ~$5-7 reserve. Updated 27 Oct 2026 with $26 left: $19 main run (D-042), ~$7 for gate 4, evals and reserve.
-
-## Next steps
-
-1. Gate 1: build the tokenizer corpus, train the tokenizer, prep the data ([docs/08-roadmap.md](docs/08-roadmap.md))
-2. Gates 2 to 6: smoke test, throughput, ablations, main run, release. The GGUF test must pass before gate 5
-3. Still open: token budget and GPU type (gate 3), model name and HF account (Rahul). See [docs/open-questions.md](docs/open-questions.md)
+About $28 of Modal Starter credits for everything: data prep, tests, ablations, the main run (~$18 on one H100) and evals.

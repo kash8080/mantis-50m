@@ -1,8 +1,10 @@
 [project]
 name = "slm-50m"
 version = "0.0.1"
-description = "A sub-50M parameter language model pretrained from scratch on a $30 Modal budget, aimed at the Open SLM Leaderboard"
+description = "Mantis-50M: a sub-50M parameter language model pretrained from scratch on a $30 Modal budget"
 readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
 requires-python = ">=3.12,<3.14"
 # Exact pins for the packages that decide numbers (D-035). Everything else is locked in uv.lock
 dependencies = [

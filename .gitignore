@@ -30,5 +30,7 @@ wandb/
 .env
 .DS_Store
 
-/docs
+# Design docs stay private, except the decontamination report that ships with the release
+/docs/*
+!/docs/filter-report.md
 CLAUDE.md
