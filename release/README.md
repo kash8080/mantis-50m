@@ -17,11 +17,12 @@ datasets:
 - HuggingFaceTB/finemath
 - nvidia/OpenMathInstruct-2
 - microsoft/orca-math-word-problems-200k
+- kash8080/Mantis-50M-arith
 ---
 
 # Mantis-50M
 
-Mantis-50M is a **49.3M parameter** base language model, pretrained from scratch on about **$30 of cloud GPU credits**. On the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard) it scores an Intelligence Index of **30.05**. The best under-50M model listed on 28 Oct 2026 scores 17.93.
+Mantis-50M is a **49.3M parameter** base language model, pretrained from scratch on about **$30 of cloud GPU credits**. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of **30.05**. The best under-50M model listed on 28 Oct 2026 scores 17.93. It is not on the leaderboard yet.
 
 - **Code:** [github.com/kash8080/mantis-50m](https://github.com/kash8080/mantis-50m)
 - **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF)
@@ -38,7 +39,7 @@ Zero-shot, with the leaderboard's tools: lm-eval 0.4.12 (`acc_norm`, fp32) for H
 | 50M-pro (under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
 | KLM-1.5 (under-100M #1) | 99.0M | 43.74 | 59.68 | 32.68 | 68.55 | 48.20 | 30.26 |
 
-Mantis-50M leads 50M-pro on all five benchmarks. Most of the gap comes from ArithMark, which our synthetic arithmetic data targets (see Data). Without ArithMark, the other four still lead: 15.64 vs 15.00 of the index.
+Mantis-50M leads 50M-pro on all five benchmarks. Most of the gap comes from ArithMark, which our synthetic arithmetic data targets (see Data). Without ArithMark, the other four still lead: 15.64 vs 15.00 of the index. The arithmetic transfers only partly to problems worded differently from our data: see [Held-out arithmetic](#held-out-arithmetic).
 
 The raw eval files are in [`evals/`](evals/): `summary.json` (scores, tool versions, ArithMark data and script hashes), `lm_eval_results.json` and the ArithMark results.
 
@@ -105,7 +106,59 @@ Greedy samples (repetition penalty 1.1), prompt in bold:
 
 Every source is pinned to a Hub commit in the code. Every batch holds every source in its mix share.
 
-**Synthetic arithmetic.** Grade-school arithmetic stories, questions and worked answers, made by our own generators ([`src/slm50m/arith/`](https://github.com/kash8080/mantis-50m/tree/main/src/slm50m/arith)). They are written from general English word lists, never from benchmark items. The decay phase uses a second, wider generator with ~500 names, ~200 objects and ten answer formats, because the first one taught the skill only inside its own wording. This data is why ArithMark is high, and we say so plainly.
+**Synthetic arithmetic.** Grade-school arithmetic stories, questions and worked answers, made by our own generators ([`src/slm50m/arith/`](https://github.com/kash8080/mantis-50m/tree/main/src/slm50m/arith)). They are written from general English word lists, never from benchmark items. The decay phase uses a second, wider generator with ~500 names, ~200 objects and ten answer formats, because the first one taught the skill only inside its own wording. This data is why ArithMark is high, and we say so plainly. The exact text is published as [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith): all of the decay data and a sample of the stable-phase data.
+
+## Held-out arithmetic
+
+ArithMark's 85.7% overstates the model's general arithmetic. We tested it on grade-school word problems from [ASDiv](https://huggingface.co/datasets/EleutherAI/asdiv) and [SVAMP](https://huggingface.co/datasets/ChilleD/SVAMP), written by other people and scored the same way as ArithMark (4 choices, mean log-prob per answer token). Orca-Math, one of our training sources, contains most of both sets, so we kept only the 232 problems that share no 8-word span with it, even with numbers masked. "Before" is our own checkpoint at step 26,703, before the synthetic arithmetic decay.
+
+| Prompt / wrong choices | Before | Mantis-50M | ArithMark-3 (before, after) |
+|---|---|---|---|
+| "... The answer is N." / N±1, N±2 | 25.4 | 35.8 | 37.3, 85.7 |
+| "... The answer is N." / wrong-operation results | 15.1 | 32.8 | |
+| "... The answer is N apples." / wrong-operation results | 21.0 | 41.1 | |
+| "Question: ... Answer: N" / N±1, N±2 | 28.4 | 31.0 | |
+
+Chance is 25%, standard error about 3 points. The synthetic data taught some arithmetic that carries over to other people's wording (+10 to +20 points in story form), much less than the +48 on ArithMark suggests. Subtraction is the weakest. ASDiv is harder than ArithMark (grades 1 to 6, larger numbers), so these numbers are not an ArithMark estimate.
+
+<details>
+<summary>Samples of the synthetic arithmetic data (unedited)</summary>
+
+From the decay-phase generator (`generator_v2.py`):
+
+```
+Think and solve
+Melody has 9 folders. Ray has twice as many folders. How many folders does Ray have? Multiply: 9 × 2 = 18. So Ray has 18 folders.
+The pumpkin measured 8 kilograms. Written in grams, that is 8000 grams.
+Question: A class voted on their favorite snack: popcorn 4, carrots 28, crackers 14, pretzels 12. How many votes in all?
+Answer: 58 votes.
+```
+
+```
+Practice sheet
+(1) There were 81 pebbles in Bianca's pail. Bianca was given 7 more. Then she put 79 away. She now has 9 pebbles.
+(2) 4 × 4 = 16
+(3) Audrey came to the book fair with 38 snowballs. Audrey earned 13 more snowballs. Then she gave 29 to William. What is the number of snowballs she has at the end? That left she with 22.
+(4) Look at the pattern: 147, 135, 123, 111. What number comes next? Continuing the pattern gives 99.
+(5) Megan shared 50 shells equally among 10 friends. How many does each get? 50 ÷ 10 = 5. In each group there are 5 shells.
+```
+
+From the stable-phase generator (`generator.py`):
+
+```
+Homework check
+
+7 - 2 = 5
+
+There were 33 tomatoes in a jar, and 23 were removed. How many tomatoes remained in the jar?
+Step 1: 33 - 23 = 10. The jar was left with 10 tomatoes.
+
+18 × 13 = 234
+```
+
+All the decay data, exactly as trained: [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith). Generator code: [`src/slm50m/arith/`](https://github.com/kash8080/mantis-50m/tree/main/src/slm50m/arith).
+
+</details>
 
 ## Decontamination
 

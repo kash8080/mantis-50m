@@ -13,7 +13,7 @@ tags:
 
 # Mantis-50M GGUF
 
-[Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) in GGUF format for [llama.cpp](https://github.com/ggml-org/llama.cpp) and the apps built on it. Mantis-50M is a 49.3M parameter base model pretrained from scratch on about $30 of cloud GPU credits. It scores an Intelligence Index of 30.05 on the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard). The [main model card](https://huggingface.co/kash8080/Mantis-50M) has the results, data and training details.
+[Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) in GGUF format for [llama.cpp](https://github.com/ggml-org/llama.cpp) and the apps built on it. Mantis-50M is a 49.3M parameter base model pretrained from scratch on about $30 of cloud GPU credits. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of 30.05 (not on the leaderboard yet). The [main model card](https://huggingface.co/kash8080/Mantis-50M) has the results, data and training details, and the synthetic arithmetic it was trained on is public as [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith).
 
 | File | Type | Size | Quality vs the original |
 |---|---|---|---|
@@ -69,4 +69,4 @@ The tokenizer is new to llama.cpp, so `convert_hf_to_gguf.py` stops with "BPE pr
 
 ## Licence
 
-CC-BY-NC-4.0, same as [Mantis-50M](https://huggingface.co/kash8080/Mantis-50M). Code: [github.com/kash8080/mantis-50m](https://github.com/kash8080/mantis-50m).
+CC-BY-NC-4.0, same as [Mantis-50M](https://huggingface.co/kash8080/Mantis-50M). Code: [github.com/kash8080/mantis-50m](https://github.com/kash8080/mantis-50m). Arithmetic data: [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith).

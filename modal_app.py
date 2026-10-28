@@ -395,7 +395,7 @@ RELEASE_CONTAINER_HOUR = 2 * CPU_CORE_HOUR + 4 * MEM_GIB_HOUR  # 2 cores, 4 GiB
 @app.function(image=image, scaledown_window=IDLE, volumes={RUNS: runs_vol}, secrets=[hf_secret], cpu=2, memory=4096,
               timeout=1800)
 def _upload_release(repo_id: str, files: dict[str, bytes], volume_files: dict[str, tuple[str, str]], private: bool,
-                    message: str) -> str:
+                    message: str, repo_type: str = "model") -> str:
     """Rebuild the release folder from the Mac's small files plus big files from the Volume (each checked against
     its sha256), then push it to the Hub in one commit."""
     import hashlib
@@ -419,55 +419,97 @@ def _upload_release(repo_id: str, files: dict[str, bytes], volume_files: dict[st
                 raise RuntimeError(f"{src} sha256 {sha}, expected {expected}")
             shutil.copy(src, Path(tmp) / name)
         api = HfApi()
-        if not volume_files and not api.repo_exists(repo_id):
+        if not volume_files and not api.repo_exists(repo_id, repo_type=repo_type):
             raise RuntimeError(f"{repo_id} does not exist: a card-only upload would make a repo with no weights")
-        api.create_repo(repo_id, private=private, exist_ok=True)  # an existing repo keeps its visibility
-        commit = api.upload_folder(folder_path=tmp, repo_id=repo_id, commit_message=message)
+        # an existing repo keeps its visibility
+        api.create_repo(repo_id, private=private, exist_ok=True, repo_type=repo_type)
+        commit = api.upload_folder(folder_path=tmp, repo_id=repo_id, commit_message=message, repo_type=repo_type)
     return f"{_hf_user()} ({role} token) -> {commit.commit_url}"
 
 
 @app.local_entrypoint()
 def upload_release(repo: str = "kash8080/Mantis-50M", folder: str = "_build/release/Mantis-50M", public: bool = False,
-                   cards_only: bool = False, yes: bool = False):
+                   cards_only: bool = False, repo_type: str = "model", yes: bool = False):
     """Private repo unless --public. Small files come from the Mac folder. model.safetensors always comes from the
-    scored export on the Volume. .gguf files are copied to the Volume first (free) and checked again in the container.
-    --cards-only sends just README.md to a repo that already exists: no weights read, visibility unchanged.
+    scored export on the Volume. .gguf and .parquet files are copied to the Volume first (free) and checked again in
+    the container. --cards-only sends just README.md to a repo that already exists: no weights read, visibility
+    unchanged. --repo-type dataset for a dataset repo.
 
         uv run modal run modal_app.py::upload_release --repo kash8080/Mantis-50M-GGUF --folder _build/release/Mantis-50M-GGUF
+        uv run modal run modal_app.py::upload_release --repo kash8080/Mantis-50M-arith --folder _build/release/Mantis-50M-arith --repo-type dataset
         uv run modal run modal_app.py::upload_release --cards-only
     """
     import hashlib
 
     root = Path(folder)
-    big = [p for p in sorted(root.rglob("*")) if p.suffix in (".safetensors", ".gguf")]
+    big = [p for p in sorted(root.rglob("*")) if p.suffix in (".safetensors", ".gguf", ".parquet")]
     files = {str(p.relative_to(root)): p.read_bytes() for p in sorted(root.rglob("*"))
              if p.is_file() and p not in big and p.name != ".DS_Store"}
     if cards_only:
         files = {name: blob for name, blob in files.items() if name == "README.md"}
         big = []
-    ggufs = [p for p in big if p.suffix == ".gguf"]
-    required = ["README.md"] + ([] if ggufs or cards_only else ["config.json", "generation_config.json",
-                                                                "tokenizer.json", "tokenizer_config.json"])
+    copied = [p for p in big if p.suffix in (".gguf", ".parquet")]  # from the Mac, via the Volume
+    required = ["README.md"] + ([] if copied or cards_only else ["config.json", "generation_config.json",
+                                                                 "tokenizer.json", "tokenizer_config.json"])
     for name in required:
         if name not in files:
             raise SystemExit(f"{folder}/{name} is missing")
     if cards_only:
-        volume_files, message = {}, "Update model card"
-    elif ggufs:
-        volume_files = {p.name: (f"release/{p.name}", hashlib.sha256(p.read_bytes()).hexdigest()) for p in ggufs}
-        message = f"{root.name}: {', '.join(p.name for p in ggufs)}, model card"
+        volume_files, message = {}, "Update card"
+    elif copied:
+        volume_files = {str(p.relative_to(root)): (f"release/{root.name}/{p.relative_to(root)}",
+                                                   hashlib.sha256(p.read_bytes()).hexdigest()) for p in copied}
+        message = f"{root.name}: {', '.join(sorted(volume_files))}, card"
     else:
         volume_files = {"model.safetensors": (RELEASE_WEIGHTS, RELEASE_SHA256)}
         message = "Mantis-50M: final checkpoint (step 34,000), model card, evals"
     visibility = "visibility unchanged" if cards_only else "public" if public else "private"
     print(f"{repo} ({visibility}): {sorted(volume_files)} from the Volume + {sorted(files)}")
     confirm(f"upload {repo}", RELEASE_CONTAINER_HOUR * 0.5 * OVERHEAD + 0.01, yes)
-    if ggufs:
+    if copied:
         with runs_vol.batch_upload(force=True) as batch:
-            for p in ggufs:
-                batch.put_file(str(p), f"/release/{p.name}")
-        print(f"copied {[p.name for p in ggufs]} to slm50m-runs:/release/")
-    print(_upload_release.remote(repo, files, volume_files, not public, message))
+            for name, (vol_path, _) in volume_files.items():
+                batch.put_file(str(root / name), f"/{vol_path}")
+        print(f"copied {sorted(volume_files)} to slm50m-runs:/release/{root.name}/")
+    print(_upload_release.remote(repo, files, volume_files, not public, message, repo_type))
+
+
+ARITH_CONTAINER_HOUR = 4 * CPU_CORE_HOUR + 8 * MEM_GIB_HOUR  # 4 cores, 8 GiB
+
+
+@app.function(image=image, scaledown_window=IDLE, volumes={DATA: data_vol}, secrets=[hf_secret], cpu=4, memory=8192,
+              timeout=3600)
+def _upload_arith_dataset(repo_id: str, card: bytes, manifests: dict[str, dict], private: bool) -> dict:
+    """Decode the trained arithmetic shards to parquet next to the Volume and push them with the card (D-050)."""
+    import tempfile
+
+    from huggingface_hub import HfApi
+
+    from slm50m.dataprep.export_arith import export
+    from slm50m.tokenizer.train_tokenizer import load_tokenizer
+
+    with tempfile.TemporaryDirectory() as tmp:
+        summary = export(Path(DATA), Path(tmp), load_tokenizer(Path(DATA) / "tokenizer"), manifests)
+        (Path(tmp) / "README.md").write_bytes(card)
+        api = HfApi()
+        api.create_repo(repo_id, repo_type="dataset", private=private, exist_ok=True)
+        commit = api.upload_folder(folder_path=tmp, repo_id=repo_id, repo_type="dataset",
+                                   commit_message="Synthetic arithmetic data as trained: v2 (decay), v1 sample (stable)")
+    return {"summary": summary, "user": _hf_user(), "commit": commit.commit_url}
+
+
+@app.local_entrypoint()
+def upload_arith_dataset(repo: str = "kash8080/Mantis-50M-arith", card: str = "release/arith/README.md",
+                         public: bool = False, yes: bool = False):
+    """The exact synthetic arithmetic text from the data Volume's shards -> an HF dataset repo. Private unless --public.
+    Later card edits: upload_release --cards-only --repo-type dataset --repo <repo> --folder <folder with README.md>"""
+    from slm50m.dataprep.export_arith import CONFIGS
+
+    manifests = {source: json.loads((Path("manifests") / f"{source}.json").read_text()) for source, _ in CONFIGS.values()}
+    print(f"{repo} ({'public' if public else 'private'}): {list(CONFIGS)} decoded on Modal + {card}")
+    confirm(f"export and upload {repo}", ARITH_CONTAINER_HOUR * 1.0 * OVERHEAD + 0.01, yes)
+    result = _upload_arith_dataset.remote(repo, Path(card).read_bytes(), manifests, not public)
+    print(json.dumps(result, indent=2))
 
 
 KERNEL_KINDS = [  # first match wins, on the lowercased kernel name

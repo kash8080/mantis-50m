@@ -1,9 +1,10 @@
 # Mantis-50M
 
-A language model with **49.3M parameters**, pretrained from scratch on about **$30 of Modal credits**. It scores an Intelligence Index of **30.05** on the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard), against **17.93** for the best under-50M model listed on 28 Oct 2026.
+A language model with **49.3M parameters**, pretrained from scratch on about **$30 of Modal credits**. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of **30.05**, against **17.93** for the best under-50M model listed on 28 Oct 2026. It is not on the leaderboard yet. Most of the lead comes from ArithMark, and the arithmetic transfers only partly to problems worded differently from our training data (see [the model card](https://huggingface.co/kash8080/Mantis-50M#held-out-arithmetic)).
 
-- **Model:** [kash8080/Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) (coming soon)
-- **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF) (coming soon)
+- **Model:** [kash8080/Mantis-50M](https://huggingface.co/kash8080/Mantis-50M)
+- **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF)
+- **Synthetic arithmetic data:** [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith)
 
 ## Results
 
