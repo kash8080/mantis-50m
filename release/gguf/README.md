@@ -33,7 +33,7 @@ llama-completion -m Mantis-50M-F16.gguf -p "Photosynthesis is the process by whi
 Photosynthesis is the process by which plants convert sunlight into chemical energy.
 ```
 
-`llama-server -m Mantis-50M-F16.gguf` serves it on an OpenAI-style completions endpoint. With Ollama: `ollama run hf.co/kash8080/Mantis-50M-GGUF`.
+`llama-server -m Mantis-50M-F16.gguf` serves it on an OpenAI-style completions endpoint. With Ollama: `ollama run hf.co/kash8080/Mantis-50M-GGUF` (tested on Ollama 0.24.0). Ollama samples by default. With temperature 0 and repeat penalty 1.1 it gives the same text as above.
 
 ## Speed and memory
 

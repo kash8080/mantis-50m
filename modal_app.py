@@ -14,6 +14,7 @@ Every paid entry point prints its worst-case cost and waits for a yes (D-015, CL
     uv run modal run modal_app.py::run_train --config configs/smoke.json --gpu L4 --hours 0.4
     uv run modal run --detach modal_app.py::run_train --config configs/main.json --gpu H100 --hours 5.5
     uv run modal run modal_app.py::run_eval --run main --checkpoint ckpt/final_0034000.pt
+    uv run modal run modal_app.py::run_math_evals --limit 20                  # Q-27 math evals (no --limit: full)
     uv run modal run modal_app.py::upload_release                          # CPU: _build/release/Mantis-50M -> HF (D-048)
 """
 
@@ -35,7 +36,7 @@ app = modal.App("slm50m")
 image = (
     modal.Image.debian_slim(python_version="3.12")
     .uv_sync(frozen=True)  # same pins as uv.lock (D-035)
-    .add_local_python_source("slm50m")
+    .add_local_python_source("slm50m", ignore=["**/__pycache__"])  # not only .py: heldout_arith_items.json
 )
 data_vol = modal.Volume.from_name("slm50m-data", create_if_missing=True)
 runs_vol = modal.Volume.from_name("slm50m-runs", create_if_missing=True)
@@ -382,6 +383,41 @@ def run_eval(run: str, checkpoint: str, limit: int = 0, gpu: str = "L4", yes: bo
     confirm(f"evaluate {run}/{checkpoint} on {gpu}", GPU_PRICES[gpu] * 1.0 * OVERHEAD, yes)
     summary = evaluate.with_options(gpu=gpu).remote(run, checkpoint, limit or None)
     print(json.dumps({"scores": summary["scores"], "ii": summary["ii"]}, indent=2))
+
+
+@app.function(image=image, scaledown_window=IDLE, volumes={DATA: data_vol, RUNS: runs_vol}, gpu="L4", timeout=3600)
+def math_evals(run_name: str, checkpoints: list[str], limit: int | None = None) -> dict:
+    """Math evals outside ArithMark (math_evals.py) on each checkpoint's HF export, made first if missing."""
+    from slm50m.evaluation.math_evals import run_math_evals
+    from slm50m.model.export import export, load_checkpoint_model
+
+    runs_vol.reload()
+    run_dir = Path(RUNS) / run_name
+    out = {}
+    for checkpoint in checkpoints:
+        eval_dir = run_dir / "evals" / Path(checkpoint).stem
+        hf_dir = eval_dir / "hf"
+        if not (hf_dir / "model.safetensors").exists():
+            export(load_checkpoint_model(run_dir / checkpoint), hf_dir, Path(DATA) / "tokenizer")
+        out[checkpoint] = run_math_evals(hf_dir, Path("/tmp/math_raw"), eval_dir / ("math_test" if limit else "math"),
+                                         "cuda", limit)
+        runs_vol.commit()
+    return out
+
+
+@app.local_entrypoint()
+def run_math_evals(run: str = "main", checkpoints: str = "ckpt/predecay_0027200.pt,ckpt/final_0034000.pt",
+                   limit: int = 0, gpu: str = "L4", out: str = "_build/math_evals/math_summary.json", yes: bool = False):
+    """Q-27: GPT-3 arithmetic, ASDiv/SVAMP held-out, MathQA, MMLU elementary math. --limit N for a quick check."""
+    confirm(f"math evals on {run} {checkpoints} on {gpu}", GPU_PRICES[gpu] * 0.5 * OVERHEAD, yes)
+    result = math_evals.with_options(gpu=gpu).remote(run, checkpoints.split(","), limit or None)
+    Path(out).parent.mkdir(parents=True, exist_ok=True)
+    Path(out).write_text(json.dumps(result, indent=2))
+    for checkpoint, summary in result.items():
+        print(f"\n== {checkpoint}")
+        for task, s in summary["scores"].items():
+            print(f"  {task:<44} " + "  ".join(f"{m} {v:5.1f}" for m, v in s.items()))
+    print(f"\nwrote {out}")
 
 
 # ---------------------------------------------------------------- release (gate 6, CPU)

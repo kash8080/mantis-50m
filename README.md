@@ -97,6 +97,7 @@ uv run pytest -m "not network"
 | Run charts (open `<run_dir>/plots.html`) | `uv run slm-plot <run_dir> --watch 30` |
 | Export / evaluate | `uv run slm-export-hf <ckpt> <out>`, `uv run slm-evaluate <ckpt> <out>` |
 | Held-out arithmetic (ASDiv/SVAMP, ~3 min on a Mac CPU) | `uv run slm-heldout-arith <raw_dir> kash8080/Mantis-50M`. The download commands are in [`heldout_arith.py`](src/slm50m/evaluation/heldout_arith.py) |
+| Math evals outside ArithMark (GPT-3 arithmetic, ASDiv/SVAMP, MathQA, MMLU elementary math; ~12 min on a Modal A10) | `uv run modal run modal_app.py::run_math_evals --gpu A10`. See [`math_evals.py`](src/slm50m/evaluation/math_evals.py) |
 
 ## Budget
 

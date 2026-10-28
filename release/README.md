@@ -41,6 +41,8 @@ Zero-shot, with the leaderboard's tools: lm-eval 0.4.12 (`acc_norm`, fp32) for H
 
 Mantis-50M leads 50M-pro on all five benchmarks. Most of the gap comes from ArithMark, which our synthetic arithmetic data targets (see Data). Without ArithMark, the other four still lead: 15.64 vs 15.00 of the index. The arithmetic transfers only partly to problems worded differently from our data: see [Held-out arithmetic](#held-out-arithmetic).
 
+ArithMark is uneven across its 17 topics. 14 score above 75%, but two-step subtraction is at 37.5% (32 items) and data at 51.2% (43 items). Per-topic scores are in `evals/arithmark_results.json`.
+
 The raw eval files are in [`evals/`](evals/): `summary.json` (scores, tool versions, ArithMark data and script hashes), `lm_eval_results.json` and the ArithMark results.
 
 ## Usage
@@ -102,7 +104,7 @@ Greedy samples (repetition penalty 1.1), prompt in bold:
 | [Cosmopedia WikiHow](https://huggingface.co/datasets/HuggingFaceTB/cosmopedia) | Apache-2.0 | 2% | 9% |
 | [FineMath-4plus](https://huggingface.co/datasets/HuggingFaceTB/finemath) | ODC-BY | 7% | 8% |
 | Word problems: [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) (GSM8K-type rows only) and [Orca-Math](https://huggingface.co/datasets/microsoft/orca-math-word-problems-200k) | CC-BY-4.0, MIT | 4% | 8% |
-| Synthetic arithmetic (our generator) | ours | 7% | 12% |
+| Synthetic arithmetic, our generators ([kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith)) | CC-BY-4.0 | 7% (v1) | 12% (v2) |
 
 Every source is pinned to a Hub commit in the code. Every batch holds every source in its mix share.
 
@@ -110,7 +112,7 @@ Every source is pinned to a Hub commit in the code. Every batch holds every sour
 
 ## Held-out arithmetic
 
-ArithMark's 85.7% overstates the model's general arithmetic. We tested it on grade-school word problems from [ASDiv](https://huggingface.co/datasets/EleutherAI/asdiv) and [SVAMP](https://huggingface.co/datasets/ChilleD/SVAMP), written by other people and scored the same way as ArithMark (4 choices, mean log-prob per answer token). Orca-Math, one of our training sources, contains most of both sets, so we kept only the 232 problems that share no 8-word span with it, even with numbers masked. "Before" is our own checkpoint at step 26,703, before the synthetic arithmetic decay.
+ArithMark's 85.7% overstates the model's general arithmetic. We tested it on grade-school word problems from [ASDiv](https://huggingface.co/datasets/EleutherAI/asdiv) and [SVAMP](https://huggingface.co/datasets/ChilleD/SVAMP), written by other people and scored the same way as ArithMark (4 choices, mean log-prob per answer token). Orca-Math, one of our training sources, contains most of both sets, so we kept only the 232 problems that share no 8-word span with it, even with numbers masked. "Before" is our own checkpoint at step 26,703, before the decay. It is not released, so only the Mantis-50M column can be rerun.
 
 | Prompt / wrong choices | Before | Mantis-50M | ArithMark-3 (before, after) |
 |---|---|---|---|
@@ -119,7 +121,30 @@ ArithMark's 85.7% overstates the model's general arithmetic. We tested it on gra
 | "... The answer is N apples." / wrong-operation results | 21.0 | 41.1 | |
 | "Question: ... Answer: N" / N±1, N±2 | 28.4 | 31.0 | |
 
-Chance is 25%, standard error about 3 points. The synthetic data taught some arithmetic that carries over to other people's wording (+10 to +20 points in story form), much less than the +48 on ArithMark suggests. Subtraction is the weakest. ASDiv is harder than ArithMark (grades 1 to 6, larger numbers), so these numbers are not an ArithMark estimate.
+Chance is 25%, standard error about 3 points. The decay, with its synthetic arithmetic, taught some arithmetic that carries over to other people's wording (+10 to +20 points in story form), much less than the +48 on ArithMark suggests. Subtraction is the weakest. ASDiv is harder than ArithMark (grades 1 to 6, larger numbers), so these numbers are not an ArithMark estimate.
+
+To rerun it, use [`heldout_arith.py`](https://github.com/kash8080/mantis-50m/blob/main/src/slm50m/evaluation/heldout_arith.py) (`uv run slm-heldout-arith`). It rebuilds the 232 problems from pinned copies of ASDiv, SVAMP and Orca-Math, checks them against the [committed ID list](https://github.com/kash8080/mantis-50m/blob/main/src/slm50m/evaluation/heldout_arith_items.json), and scores any HF model. A rerun from fresh downloads gave the numbers above exactly. It takes about 3 minutes on a laptop CPU.
+
+## Other math benchmarks
+
+To check that the arithmetic is learned and not fitted to ArithMark, we ran three more public math benchmarks: zero-shot, lm-eval 0.4.12 prompts and metrics. "Before" is our checkpoint at step 27,200, the last one before the decay (not released).
+
+| Benchmark (chance) | Items | Scoring | Before | Mantis-50M |
+|---|---|---|---|---|
+| [GPT-3 arithmetic](https://huggingface.co/datasets/EleutherAI/arithmetic), mean of 10 tasks (0) | 20,000 | exact match of the greedy answer | 16.6 | **36.7** |
+| 2-digit add / subtract | 2,000 each | | 51.9 / 23.8 | 93.3 / 50.9 |
+| 3-digit add / subtract | 2,000 each | | 35.4 / 20.8 | 80.1 / 46.1 |
+| 4-digit add / subtract | 2,000 each | | 8.5 / 5.5 | 42.0 / 33.9 |
+| 5-digit add / subtract | 2,000 each | | 0.3 / 0.3 | 3.1 / 4.8 |
+| 2-digit multiply | 2,000 | | 16.0 | 4.5 |
+| 1-digit compound, e.g. (2+3)*4 | 2,000 | | 3.6 | 8.6 |
+| [MathQA](https://huggingface.co/datasets/allenai/math_qa) (20) | 2,985 | 5 choices, `acc_norm` | 23.4 | 24.6 |
+| [MMLU](https://huggingface.co/datasets/cais/mmlu) elementary mathematics (25) | 378 | 4 choices, letters, `acc` | 26.7 | 26.5 |
+| MMLU elementary mathematics, answer text (25) | 378 | 4 choices, `acc_norm` | 27.0 | 24.1 |
+
+GPT-3 arithmetic asks "Question: What is 98 plus 45? Answer:" and counts an answer only if the model writes it exactly, so there are no choices to guess from. Addition and subtraction up to 4 digits rose 25 to 45 points in the decay. Two-digit multiplication fell, likely because our generators mostly multiply small numbers. MathQA and MMLU stay at chance before and after, as expected at this size: the model has no general math reasoning, and the arithmetic data did not cost it any.
+
+To rerun it, use [`math_evals.py`](https://github.com/kash8080/mantis-50m/blob/main/src/slm50m/evaluation/math_evals.py) (`modal run modal_app.py::run_math_evals`, about 12 minutes on one A10 for both checkpoints). It also reruns the held-out arithmetic above. The final model's numbers there matched exactly.
 
 <details>
 <summary>Samples of the synthetic arithmetic data (unedited)</summary>
@@ -171,7 +196,8 @@ All the decay data, exactly as trained: [kash8080/Mantis-50M-arith](https://hugg
 - A 50M base model: it makes up facts, drifts off topic and repeats itself. Use it for research, education and on-device experiments, not for anything that needs correct answers
 - English only. Context is 1,024 tokens
 - Not instruction tuned and not safety tuned. It can produce biased or offensive text that is present in web data
-- The arithmetic skill is mostly grade-school, two-digit problems in story form
+- The arithmetic skill is mostly grade-school, two-digit problems in story form. Bare addition and subtraction work up to about 4 digits, multiplication of two 2-digit numbers mostly fails. See [Other math benchmarks](#other-math-benchmarks)
+- ArithMark-3's 85.7% overstates the model's arithmetic. On grade-school problems worded by other people it scores 31 to 41% (chance 25%). See [Held-out arithmetic](#held-out-arithmetic)
 
 ## Licence
 
