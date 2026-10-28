@@ -30,6 +30,7 @@ slm-status = "slm50m.training.cli:status"
 slm-plot = "slm50m.training.cli:plot"
 slm-export-hf = "slm50m.model.cli:main"
 slm-evaluate = "slm50m.evaluation.cli:main"
+slm-heldout-arith = "slm50m.evaluation.heldout_arith:main"
 
 [build-system]
 requires = ["uv_build>=0.11.0,<0.12.0"]

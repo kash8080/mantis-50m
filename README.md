@@ -21,7 +21,7 @@ Zero-shot, with the leaderboard's own tools: lm-eval 0.4.12 (`acc_norm`, fp32) f
 | Area | What we did |
 |---|---|
 | Architecture | Dense Qwen3-style decoder, 25 layers x 384, 6 query / 2 KV heads, SwiGLU 1,152, QK-norm, RoPE (theta 100k), tied embeddings. **49,322,240** params |
-| Export | Loads as a standard `Qwen3ForCausalLM` in transformers, no custom code. Converts and quantizes with llama.cpp (Q8_0, Q4_K_M) |
+| Export | Loads as a standard `Qwen3ForCausalLM` in transformers, no custom code. Converts to GGUF with llama.cpp. Only F16 is released: k-quants need rows that are a multiple of 256, and this model's are 384 and 1,152 ([why](https://huggingface.co/kash8080/Mantis-50M-GGUF#why-f16-only)) |
 | Tokenizer | Own byte-level BPE, 16,384 tokens, one token per digit |
 | Training | ~8.9B tokens, context 1,024, batch 262k tokens, 34,000 steps on one H100. Token-Superposition Training (bags of 6) for the first 30%, Muon + AdamW, warmup-stable-decay schedule with a 1-sqrt decay over the last 20%, bf16 |
 | Data | Web, educational, Q&A and math text (below), plus our own synthetic arithmetic. The mix shifts toward edu, how-to, Q&A and math in the decay |
@@ -50,7 +50,7 @@ Every source is pinned to an HF commit in `src/slm50m/dataprep/sources.py`. Toke
 
 ## Repo layout
 
-One folder per pipeline stage. Tests mirror the same folders. Comments cite design decisions as `D-0xx`, from the project's design log.
+One folder per pipeline stage. Tests mirror the same folders. Comments cite design decisions as `D-0xx`. These IDs point to the project's private design log, which is not in this repo. The comments say what each decision does.
 
 ```
 src/slm50m/
@@ -61,7 +61,7 @@ src/slm50m/
   dataprep/          sources, benchmark 13-gram filter, parquet -> token shards + manifests, mixture sampler
   model/             the Qwen3-style decoder and its export to Qwen3ForCausalLM
   training/          loss, TST, Muon + AdamW, WSD schedule, checkpoints, metrics + alerts, the training loop
-  evaluation/        lm-eval + ArithMark + Intelligence Index, with versions
+  evaluation/        lm-eval + ArithMark + Intelligence Index, with versions. The held-out ASDiv/SVAMP check
 configs/             run configs: smoke, proxy ablations, main
 manifests/           per-source token counts and filter drops
 outputs/tokenizer/   the trained tokenizer
@@ -96,6 +96,7 @@ uv run pytest -m "not network"
 | Run status | `uv run slm-status <run_dir>/metrics.jsonl` |
 | Run charts (open `<run_dir>/plots.html`) | `uv run slm-plot <run_dir> --watch 30` |
 | Export / evaluate | `uv run slm-export-hf <ckpt> <out>`, `uv run slm-evaluate <ckpt> <out>` |
+| Held-out arithmetic (ASDiv/SVAMP, ~3 min on a Mac CPU) | `uv run slm-heldout-arith <raw_dir> kash8080/Mantis-50M`. The download commands are in [`heldout_arith.py`](src/slm50m/evaluation/heldout_arith.py) |
 
 ## Budget
 
