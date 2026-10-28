@@ -14,6 +14,7 @@ Every paid entry point prints its worst-case cost and waits for a yes (D-015, CL
     uv run modal run modal_app.py::run_train --config configs/smoke.json --gpu L4 --hours 0.4
     uv run modal run --detach modal_app.py::run_train --config configs/main.json --gpu H100 --hours 5.5
     uv run modal run modal_app.py::run_eval --run main --checkpoint ckpt/final_0034000.pt
+    uv run modal run modal_app.py::upload_release                          # CPU: _build/release/Mantis-50M -> HF (D-048)
 """
 
 import json
@@ -381,6 +382,58 @@ def run_eval(run: str, checkpoint: str, limit: int = 0, gpu: str = "L4", yes: bo
     confirm(f"evaluate {run}/{checkpoint} on {gpu}", GPU_PRICES[gpu] * 1.0 * OVERHEAD, yes)
     summary = evaluate.with_options(gpu=gpu).remote(run, checkpoint, limit or None)
     print(json.dumps({"scores": summary["scores"], "ii": summary["ii"]}, indent=2))
+
+
+# ---------------------------------------------------------------- release (gate 6, CPU)
+
+# The weights the final eval scored, read from the Volume so the upload is those exact bytes (D-048)
+RELEASE_WEIGHTS = "main/evals/final_0034000/hf/model.safetensors"
+RELEASE_SHA256 = "6fdf1b12d6228dabc1a0a50d2c4dea9b4c585da904fa7913d4b5ad8b7f45fbc5"
+RELEASE_CONTAINER_HOUR = 2 * CPU_CORE_HOUR + 4 * MEM_GIB_HOUR  # 2 cores, 4 GiB
+
+
+@app.function(image=image, scaledown_window=IDLE, volumes={RUNS: runs_vol}, secrets=[hf_secret], cpu=2, memory=4096,
+              timeout=1800)
+def _upload_release(repo_id: str, files: dict[str, bytes], private: bool) -> str:
+    """Rebuild the release folder from the Mac's small files plus the Volume's weights, then push it to the Hub."""
+    import hashlib
+    import shutil
+    import tempfile
+
+    from huggingface_hub import HfApi, whoami
+
+    role = ((whoami().get("auth") or {}).get("accessToken") or {}).get("role")  # "read", "write" or "fineGrained"
+    if role == "read":
+        raise RuntimeError("the 'huggingface' secret holds a read token: replace it with a write token")
+    weights = Path(RUNS) / RELEASE_WEIGHTS
+    sha = hashlib.sha256(weights.read_bytes()).hexdigest()
+    if sha != RELEASE_SHA256:
+        raise RuntimeError(f"{weights} sha256 {sha} is not the scored export {RELEASE_SHA256}")
+    with tempfile.TemporaryDirectory() as tmp:
+        for name, blob in files.items():
+            (Path(tmp) / name).parent.mkdir(parents=True, exist_ok=True)
+            (Path(tmp) / name).write_bytes(blob)
+        shutil.copy(weights, Path(tmp) / "model.safetensors")
+        api = HfApi()
+        api.create_repo(repo_id, private=private, exist_ok=True)
+        commit = api.upload_folder(folder_path=tmp, repo_id=repo_id,
+                                   commit_message="Mantis-50M: final checkpoint (step 34,000), model card, evals")
+    return f"{_hf_user()} ({role} token) -> {commit.commit_url}"
+
+
+@app.local_entrypoint()
+def upload_release(repo: str = "kash8080/Mantis-50M", folder: str = "_build/release/Mantis-50M", public: bool = False,
+                   yes: bool = False):
+    """Private repo unless --public. Small files come from the Mac folder, the weights from the Volume."""
+    root = Path(folder)
+    files = {str(p.relative_to(root)): p.read_bytes() for p in sorted(root.rglob("*"))
+             if p.is_file() and p.name not in ("model.safetensors", ".DS_Store")}
+    for name in ("README.md", "config.json", "generation_config.json", "tokenizer.json", "tokenizer_config.json"):
+        if name not in files:
+            raise SystemExit(f"{folder}/{name} is missing")
+    print(f"{repo} ({'public' if public else 'private'}): model.safetensors from the Volume + {sorted(files)}")
+    confirm(f"upload {repo}", RELEASE_CONTAINER_HOUR * 0.5 * OVERHEAD + 0.01, yes)
+    print(_upload_release.remote(repo, files, not public))
 
 
 KERNEL_KINDS = [  # first match wins, on the lowercased kernel name
