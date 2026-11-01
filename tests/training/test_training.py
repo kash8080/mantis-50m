@@ -10,7 +10,7 @@ import pytest
 import torch
 import torch.nn.functional as F
 
-from slm50m.config import PRESETS, RunConfig
+from slm50m.config import PRESETS, REPO_ROOT, RunConfig
 from slm50m.model.qwen3 import Qwen3LM
 from slm50m.training.metrics import Alerts, MetricsLog
 from slm50m.training.optim import BatchedMuon, build_optimizers, split_params
@@ -169,3 +169,14 @@ def test_tst_switch_keeps_model_and_optimizer_state(tmp_path, data_dir):
     assert all(adam.state[p]["step"].item() == 4 for p in adam.param_groups[0]["params"])
     muon = trainer.optimizers[0]
     assert all("momentum_buffer" in muon.state[p] for p in muon.param_groups[0]["params"])
+
+
+def test_base_config_is_main_without_synthetic_decay_data():
+    main, base = (json.loads((REPO_ROOT / "configs" / f"{name}.json").read_text()) for name in ("main", "base"))
+    main_mix, base_mix = main.pop("decay_mix"), base.pop("decay_mix")
+    assert base.pop("run_name") == "base" and main.pop("run_name") == "main"
+    assert base.pop("run_dir") == "/runs/base" and main.pop("run_dir") == "/runs/main"
+    assert base == main
+    assert base_mix["arith"] == base_mix["arith_v2"] == 0
+    assert {s: w for s, w in base_mix.items() if w > 0} == {s: w for s, w in main_mix.items() if s != "arith_v2"
+                                                            and w > 0}
