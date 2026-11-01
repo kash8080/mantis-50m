@@ -465,12 +465,14 @@ def _upload_release(repo_id: str, files: dict[str, bytes], volume_files: dict[st
 
 @app.local_entrypoint()
 def upload_release(repo: str = "kash8080/Mantis-50M", folder: str = "_build/release/Mantis-50M", public: bool = False,
-                   cards_only: bool = False, repo_type: str = "model", yes: bool = False):
+                   cards_only: bool = False, repo_type: str = "model", weights: str = RELEASE_WEIGHTS,
+                   weights_sha256: str = RELEASE_SHA256, yes: bool = False):
     """Private repo unless --public. Small files come from the Mac folder. model.safetensors always comes from the
     scored export on the Volume. .gguf and .parquet files are copied to the Volume first (free) and checked again in
     the container. --cards-only sends just README.md to a repo that already exists: no weights read, visibility
     unchanged. --repo-type dataset for a dataset repo.
 
+        uv run modal run modal_app.py::upload_release --repo kash8080/Mantis-50M-Base --folder _build/release/Mantis-50M-Base --weights base/evals/final_0034000/hf/model.safetensors --weights-sha256 c25cbc14...
         uv run modal run modal_app.py::upload_release --repo kash8080/Mantis-50M-GGUF --folder _build/release/Mantis-50M-GGUF
         uv run modal run modal_app.py::upload_release --repo kash8080/Mantis-50M-arith --folder _build/release/Mantis-50M-arith --repo-type dataset
         uv run modal run modal_app.py::upload_release --cards-only
@@ -497,8 +499,8 @@ def upload_release(repo: str = "kash8080/Mantis-50M", folder: str = "_build/rele
                                                    hashlib.sha256(p.read_bytes()).hexdigest()) for p in copied}
         message = f"{root.name}: {', '.join(sorted(volume_files))}, card"
     else:
-        volume_files = {"model.safetensors": (RELEASE_WEIGHTS, RELEASE_SHA256)}
-        message = "Mantis-50M: final checkpoint (step 34,000), model card, evals"
+        volume_files = {"model.safetensors": (weights, weights_sha256)}
+        message = f"{root.name}: final checkpoint (step 34,000), model card, evals"
     visibility = "visibility unchanged" if cards_only else "public" if public else "private"
     print(f"{repo} ({visibility}): {sorted(volume_files)} from the Volume + {sorted(files)}")
     confirm(f"upload {repo}", RELEASE_CONTAINER_HOUR * 0.5 * OVERHEAD + 0.01, yes)
