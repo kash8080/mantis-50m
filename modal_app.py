@@ -512,6 +512,40 @@ def upload_release(repo: str = "kash8080/Mantis-50M", folder: str = "_build/rele
     print(_upload_release.remote(repo, files, volume_files, not public, message, repo_type))
 
 
+@app.function(image=image, scaledown_window=IDLE, secrets=[hf_secret], cpu=1, memory=1024, timeout=300)
+def _set_public(repo_id: str) -> None:
+    from huggingface_hub import HfApi
+
+    HfApi().update_repo_settings(repo_id, private=False)
+
+
+@app.local_entrypoint()
+def set_public(repo: str, yes: bool = False):
+    """Make a model repo public. Runs in a container: Python HF calls hang on the Mac."""
+    confirm(f"make {repo} public", 0.01, yes)
+    _set_public.remote(repo)
+
+
+@app.function(image=image, scaledown_window=IDLE, secrets=[hf_secret], cpu=1, memory=1024, timeout=300)
+def _open_space_pr(space: str, path: str, blob: bytes, parent_sha: str, title: str, body: str) -> str:
+    from huggingface_hub import CommitOperationAdd, HfApi
+
+    commit = HfApi().create_commit(space, [CommitOperationAdd(path, blob)], commit_message=title,
+                                   commit_description=body, repo_type="space", create_pr=True,
+                                   parent_commit=parent_sha)
+    return commit.pr_url
+
+
+@app.local_entrypoint()
+def open_leaderboard_pr(title: str, parent_sha: str, folder: str = "_build/release/leaderboard_pr",
+                        space: str = "AxiomicLabs/Open_SLM_Leaderboard", yes: bool = False):
+    """PR on the leaderboard Space: folder/index.html, built on parent_sha, with folder/body.md as its description."""
+    confirm(f"open a PR on {space}: {title}", 0.01, yes)
+    root = Path(folder)
+    print(_open_space_pr.remote(space, "index.html", (root / "index.html").read_bytes(), parent_sha, title,
+                                (root / "body.md").read_text()))
+
+
 ARITH_CONTAINER_HOUR = 4 * CPU_CORE_HOUR + 8 * MEM_GIB_HOUR  # 4 cores, 8 GiB
 
 
