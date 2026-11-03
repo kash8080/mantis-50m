@@ -22,7 +22,9 @@ datasets:
 
 # Mantis-50M
 
-Mantis-50M is a **49.3M parameter** base language model, pretrained from scratch on about **$30 of cloud GPU credits**. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of **30.05**. The best under-50M model listed on 28 Oct 2026 scores 17.93. It is not on the leaderboard yet.
+Mantis-50M is a **49.3M parameter** base language model, pretrained from scratch on about **$30 of cloud GPU credits**. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of **30.05**. It is not on the leaderboard, and we will not submit it: its ArithMark score transfers only partly to arithmetic worded differently from our data (see [Held-out arithmetic](#held-out-arithmetic)).
+
+Its sibling [Mantis-50M-Base](https://huggingface.co/kash8080/Mantis-50M-Base) shares the first 27,200 training steps and decays on public data only. That one is on the leaderboard, **#1 in the under-50M class** at 18.36.
 
 - **Code:** [github.com/kash8080/mantis-50m](https://github.com/kash8080/mantis-50m)
 - **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF)
@@ -36,7 +38,8 @@ Zero-shot, with the leaderboard's tools: lm-eval 0.4.12 (`acc_norm`, fp32) for H
 | Model | Params | HellaSwag | ARC-E | ARC-C | PIQA | ArithMark | II |
 |---|---|---|---|---|---|---|---|
 | **Mantis-50M** | 49.32M | **34.43** | **46.17** | **26.02** | **64.85** | **85.70** | **30.05** |
-| 50M-pro (under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
+| Mantis-50M-Base (under-50M #1) | 49.32M | 34.24 | 44.61 | 26.37 | 65.89 | 35.30 | 18.36 |
+| 50M-pro (previous under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
 | KLM-1.5 (under-100M #1) | 99.0M | 43.74 | 59.68 | 32.68 | 68.55 | 48.20 | 30.26 |
 
 Mantis-50M leads 50M-pro on all five benchmarks. Most of the gap comes from ArithMark, which our synthetic arithmetic data targets (see Data). Without ArithMark, the other four still lead: 15.64 vs 15.00 of the index. The arithmetic transfers only partly to problems worded differently from our data: see [Held-out arithmetic](#held-out-arithmetic).

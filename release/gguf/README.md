@@ -13,7 +13,7 @@ tags:
 
 # Mantis-50M GGUF
 
-[Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) in GGUF format for [llama.cpp](https://github.com/ggml-org/llama.cpp) and the apps built on it. Mantis-50M is a 49.3M parameter base model pretrained from scratch on about $30 of cloud GPU credits. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of 30.05 (not on the leaderboard yet). The [main model card](https://huggingface.co/kash8080/Mantis-50M) has the results, data and training details, and the synthetic arithmetic it was trained on is public as [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith).
+[Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) in GGUF format for [llama.cpp](https://github.com/ggml-org/llama.cpp) and the apps built on it. Mantis-50M is a 49.3M parameter base model pretrained from scratch on about $30 of cloud GPU credits. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of 30.05. It is not on the leaderboard: its arithmetic score transfers only partly to other wordings, so we submitted its sibling [Mantis-50M-Base](https://huggingface.co/kash8080/Mantis-50M-Base) instead, now #1 in the under-50M class. The [main model card](https://huggingface.co/kash8080/Mantis-50M) has the results, data and training details, and the synthetic arithmetic it was trained on is public as [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith).
 
 | File | Type | Size | Quality vs the original |
 |---|---|---|---|

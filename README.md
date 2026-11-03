@@ -1,19 +1,24 @@
 # Mantis-50M
 
-A language model with **49.3M parameters**, pretrained from scratch on about **$30 of Modal credits**. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of **30.05**, against **17.93** for the best under-50M model listed on 28 Oct 2026. It is not on the leaderboard yet. Most of the lead comes from ArithMark, and the arithmetic transfers only partly to problems worded differently from our training data (see [the model card](https://huggingface.co/kash8080/Mantis-50M#held-out-arithmetic)).
+Two language models with **49.3M parameters**, pretrained from scratch on about **$33 of Modal credits**. They share the first 27,200 of 34,000 training steps and differ in the data of the final decay phase.
 
-- **Model:** [kash8080/Mantis-50M](https://huggingface.co/kash8080/Mantis-50M)
-- **GGUF (llama.cpp):** [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF)
+- **[Mantis-50M-Base](https://huggingface.co/kash8080/Mantis-50M-Base)**: decay on public data only. **#1 in the under-50M class** of the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard), Intelligence Index **18.36** (listed from 1 Nov 2026). It passed Axiomic Labs' hidden arithmetic sets
+- **[Mantis-50M](https://huggingface.co/kash8080/Mantis-50M)**: decay with 12% of our own synthetic arithmetic. Intelligence Index **30.05** with the leaderboard's tools, almost all of the gain from ArithMark. Not submitted: the arithmetic transfers only partly to problems worded differently from our data (see [its card](https://huggingface.co/kash8080/Mantis-50M#held-out-arithmetic))
+
+Both have 7% synthetic arithmetic (our first generator, v1) in the stable phase. The [Mantis-50M-Base card](https://huggingface.co/kash8080/Mantis-50M-Base#synthetic-arithmetic-in-training) shows what it left behind.
+
+- **GGUF (llama.cpp):** [kash8080/Mantis-50M-Base-GGUF](https://huggingface.co/kash8080/Mantis-50M-Base-GGUF), [kash8080/Mantis-50M-GGUF](https://huggingface.co/kash8080/Mantis-50M-GGUF)
 - **Synthetic arithmetic data:** [kash8080/Mantis-50M-arith](https://huggingface.co/datasets/kash8080/Mantis-50M-arith)
 
 ## Results
 
-Zero-shot, with the leaderboard's own tools: lm-eval 0.4.12 (`acc_norm`, fp32) for the first four, the official ArithMark-3 script for the fifth. The released model is the final checkpoint at the end of training, not one picked by benchmark score.
+Zero-shot, with the leaderboard's own tools: lm-eval 0.4.12 (`acc_norm`, fp32) for the first four, the official ArithMark-3 script for the fifth. Each released model is the final checkpoint of its run, not one picked by benchmark score.
 
 | Model | Params | HellaSwag | ARC-E | ARC-C | PIQA | ArithMark | II |
 |---|---|---|---|---|---|---|---|
-| **Mantis-50M** | 49.32M | **34.43** | **46.17** | **26.02** | **64.85** | **85.70** | **30.05** |
-| 50M-pro (under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
+| **Mantis-50M-Base (under-50M #1)** | 49.32M | **34.24** | **44.61** | **26.37** | **65.89** | **35.30** | **18.36** |
+| Mantis-50M (not submitted) | 49.32M | 34.43 | 46.17 | 26.02 | 64.85 | 85.70 | 30.05 |
+| 50M-pro (previous under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
 | KLM-1.5 (under-100M #1) | 99.0M | 43.74 | 59.68 | 32.68 | 68.55 | 48.20 | 30.26 |
 
 ## The model
@@ -24,24 +29,24 @@ Zero-shot, with the leaderboard's own tools: lm-eval 0.4.12 (`acc_norm`, fp32) f
 | Export | Loads as a standard `Qwen3ForCausalLM` in transformers, no custom code. Converts to GGUF with llama.cpp. Only F16 is released: k-quants need rows that are a multiple of 256, and this model's are 384 and 1,152 ([why](https://huggingface.co/kash8080/Mantis-50M-GGUF#why-f16-only)) |
 | Tokenizer | Own byte-level BPE, 16,384 tokens, one token per digit |
 | Training | ~8.9B tokens, context 1,024, batch 262k tokens, 34,000 steps on one H100. Token-Superposition Training (bags of 6) for the first 30%, Muon + AdamW, warmup-stable-decay schedule with a 1-sqrt decay over the last 20%, bf16 |
-| Data | Web, educational, Q&A and math text (below), plus our own synthetic arithmetic. The mix shifts toward edu, how-to, Q&A and math in the decay |
+| Data | Web, educational, Q&A and math text (below), plus our own synthetic arithmetic (none in Mantis-50M-Base's decay). The mix shifts toward edu, how-to, Q&A and math in the decay |
 | Decontamination | Every training document that shares a 13-word n-gram with HellaSwag, ARC, PIQA or ArithMark is dropped (1,474 of 28.9M). The arithmetic generator has zero exact and zero 13-gram matches with ArithMark. See [docs/filter-report.md](docs/filter-report.md) |
 
 ## Data
 
-| Source | Licence | Stable mix | Decay mix |
-|---|---|---|---|
-| [ClimbMix](https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle) | MIT on the reshuffle, CC-BY-NC-4.0 upstream | 45% | 20% |
-| [TxT360-v2](https://huggingface.co/datasets/IFM/TxT360-v2) web | CC-BY-4.0 | 12% | 6% |
-| TxT360-v2 QA (`txt360-qa`, `web-high-nltk-qa`) | CC-BY-4.0 | 8% | 14% |
-| [FineWeb-Edu dedup](https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus) | ODC-BY | 10% | 14% |
-| [Cosmopedia v2](https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus) | ODC-BY | 5% | 9% |
-| [Cosmopedia WikiHow](https://huggingface.co/datasets/HuggingFaceTB/cosmopedia) | Apache-2.0 | 2% | 9% |
-| [FineMath-4plus](https://huggingface.co/datasets/HuggingFaceTB/finemath) | ODC-BY | 7% | 8% |
-| Word problems: [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) (GSM8K-type rows) and [Orca-Math](https://huggingface.co/datasets/microsoft/orca-math-word-problems-200k) | CC-BY-4.0, MIT | 4% | 8% |
-| Synthetic arithmetic, generated by `src/slm50m/arith/` | ours | 7% (v1) | 12% (v2) |
+| Source | Licence | Stable mix | Decay mix, Base | Decay mix, Mantis-50M |
+|---|---|---|---|---|
+| [ClimbMix](https://huggingface.co/datasets/karpathy/climbmix-400b-shuffle) | MIT on the reshuffle, CC-BY-NC-4.0 upstream | 45% | 22.7% | 20% |
+| [TxT360-v2](https://huggingface.co/datasets/IFM/TxT360-v2) web | CC-BY-4.0 | 12% | 6.8% | 6% |
+| TxT360-v2 QA (`txt360-qa`, `web-high-nltk-qa`) | CC-BY-4.0 | 8% | 15.9% | 14% |
+| [FineWeb-Edu dedup](https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus) | ODC-BY | 10% | 15.9% | 14% |
+| [Cosmopedia v2](https://huggingface.co/datasets/HuggingFaceTB/smollm-corpus) | ODC-BY | 5% | 10.2% | 9% |
+| [Cosmopedia WikiHow](https://huggingface.co/datasets/HuggingFaceTB/cosmopedia) | Apache-2.0 | 2% | 10.2% | 9% |
+| [FineMath-4plus](https://huggingface.co/datasets/HuggingFaceTB/finemath) | ODC-BY | 7% | 9.1% | 8% |
+| Word problems: [OpenMathInstruct-2](https://huggingface.co/datasets/nvidia/OpenMathInstruct-2) (GSM8K-type rows) and [Orca-Math](https://huggingface.co/datasets/microsoft/orca-math-word-problems-200k) | CC-BY-4.0, MIT | 4% | 9.1% | 8% |
+| Synthetic arithmetic, generated by `src/slm50m/arith/` | ours | 7% (v1) | 0% | 12% (v2) |
 
-Every source is pinned to an HF commit in `src/slm50m/dataprep/sources.py`. Token counts per source are in `manifests/`.
+Every source is pinned to an HF commit in `src/slm50m/dataprep/sources.py`. Token counts per source are in `manifests/`. The decay configs are `configs/base.json` and `configs/main.json`.
 
 ## Licences
 
@@ -62,7 +67,7 @@ src/slm50m/
   model/             the Qwen3-style decoder and its export to Qwen3ForCausalLM
   training/          loss, TST, Muon + AdamW, WSD schedule, checkpoints, metrics + alerts, the training loop
   evaluation/        lm-eval + ArithMark + Intelligence Index, with versions. The held-out ASDiv/SVAMP check
-configs/             run configs: smoke, proxy ablations, main
+configs/             run configs: smoke, proxy ablations, main, base
 manifests/           per-source token counts and filter drops
 outputs/tokenizer/   the trained tokenizer
 modal_app.py         Modal image, Volumes and functions. Paid calls print the cost and ask first
@@ -101,4 +106,4 @@ uv run pytest -m "not network"
 
 ## Budget
 
-About $28 of Modal Starter credits for everything: data prep, tests, ablations, the main run (~$18 on one H100) and evals.
+About $33 of Modal credits for everything: data prep, tests, ablations, the main run (~$18 on one H100), the second decay for Mantis-50M-Base (~$4) and evals.

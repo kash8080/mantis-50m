@@ -22,9 +22,10 @@ datasets:
 
 # Mantis-50M-Base
 
-Mantis-50M-Base is a **49.3M parameter** base language model, pretrained from scratch. With the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard)'s evaluation tools it scores an Intelligence Index of **18.36**. The best under-50M model listed on 1 Nov 2026 scores 17.93. It is not on the leaderboard yet.
+Mantis-50M-Base is a **49.3M parameter** base language model, pretrained from scratch. It is **#1 in the under-50M class** of the [Open SLM Leaderboard](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard), with an Intelligence Index of **18.36** ([submission](https://huggingface.co/spaces/AxiomicLabs/Open_SLM_Leaderboard/discussions/287), listed from 1 Nov 2026). Axiomic Labs also ran it on their hidden arithmetic sets, and it passed.
 
 - **Code:** [github.com/kash8080/mantis-50m](https://github.com/kash8080/mantis-50m)
+- **GGUF (llama.cpp):** [kash8080/Mantis-50M-Base-GGUF](https://huggingface.co/kash8080/Mantis-50M-Base-GGUF)
 - **Sibling model:** [kash8080/Mantis-50M](https://huggingface.co/kash8080/Mantis-50M) shares the same first 27,200 training steps
 
 It is a plain base model: no instruction tuning, no chat template. It continues text.
@@ -33,12 +34,12 @@ It is a plain base model: no instruction tuning, no chat template. It continues 
 
 ## Results
 
-Zero-shot, with the leaderboard's tools: lm-eval 0.4.12 (`acc_norm`, fp32) for HellaSwag, ARC and PIQA, and the official ArithMark-3 script (default settings). This is the final checkpoint of the run (step 34,000). It was fixed as the release before any final eval, not picked by score.
+Zero-shot, with the leaderboard's tools: lm-eval 0.4.12 (`acc_norm`, fp32) for HellaSwag, ARC and PIQA, and the official ArithMark-3 script (default settings). The leaderboard lists the same scores. This is the final checkpoint of the run (step 34,000). It was fixed as the release before any final eval, not picked by score.
 
 | Model | Params | HellaSwag | ARC-E | ARC-C | PIQA | ArithMark | II |
 |---|---|---|---|---|---|---|---|
-| **Mantis-50M-Base** | 49.32M | **34.24** | **44.61** | **26.37** | **65.89** | **35.30** | **18.36** |
-| 50M-pro (under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
+| **Mantis-50M-Base (under-50M #1)** | 49.32M | **34.24** | **44.61** | **26.37** | **65.89** | **35.30** | **18.36** |
+| 50M-pro (previous under-50M #1) | 49.59M | 33.25 | 45.62 | 25.51 | 64.80 | 37.40 | 17.93 |
 | gibc-v2-lm | 49.82M | 31.87 | 47.85 | 26.11 | 60.28 | 40.20 | 16.13 |
 
 Mantis-50M-Base is ahead of 50M-pro on HellaSwag, ARC-C and PIQA, and behind on ARC-E and ArithMark. The lead is 0.43 of the index. PIQA noise alone is about ±0.6, so treat the two models as close.
@@ -55,9 +56,9 @@ The raw eval files are in [`evals/`](evals/): `summary.json` (scores, tool versi
 | Decay, steps 27,200 to 34,000 | 12% synthetic arithmetic from a second generator ("v2") | No synthetic data |
 | ArithMark-3 | 85.70 | 35.30 |
 | Intelligence Index | 30.05 | 18.36 |
-| Submitted to the leaderboard | No | Planned |
+| On the leaderboard | No, not submitted | Yes, #1 under 50M |
 
-We trained the first decay, then checked it on arithmetic outside our generators. It scored 31 to 41% there against 85.7% on ArithMark-3, so that score overstates its arithmetic. This second decay removes the question. We decided to submit its final checkpoint before seeing its score.
+We trained the first decay, then checked it on arithmetic outside our generators. It scored 31 to 41% there against 85.7% on ArithMark-3, so that score overstates its arithmetic. This second decay removes the question. We decided to submit its final checkpoint before seeing its score. Because v1 is still in its training history, Axiomic Labs ran it on their hidden arithmetic sets before listing it. It passed.
 
 ## Synthetic arithmetic in training
 
